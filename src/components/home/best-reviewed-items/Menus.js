@@ -75,18 +75,36 @@ const Menus = (props) => {
     </Stack>
   );
   const LargeScreen = () => (
-    <Tabs variant="scrollable" scrollButtons="auto">
+    <Tabs
+      variant="scrollable"
+      scrollButtons="auto"
+      TabIndicatorProps={{ style: { display: "none" } }}
+      sx={{ minHeight: "unset" }}
+    >
       {menus.map((item, index) => {
+        const isActive = selectedMenuIndex === index;
         return (
           <Tab
             sx={{
               cursor: "pointer",
-              ml: index == 0 ? 0 : 3,
-              color: selectedMenuIndex === index ? "primary.main" : "inherit",
-              fontWeight: selectedMenuIndex === index ? "700" : "inherit",
-              transition: "all ease 0.5s",
+              ml: index === 0 ? 0 : 1,
+              minHeight: "unset",
+              borderRadius: "24px",
+              padding: "6px 16px",
+              fontSize: "13px",
+              fontWeight: isActive ? 700 : 500,
+              textTransform: "none",
+              border: "none",
+              backgroundColor: isActive
+                ? theme.palette.primary.main
+                : "transparent",
+              color: isActive ? "#fff !important" : "text.secondary",
+              transition: "all 0.18s ease",
               "&:hover": {
-                color: "primary.main",
+                backgroundColor: isActive
+                  ? theme.palette.primary.main
+                  : "rgba(0,0,0,0.06)",
+                color: isActive ? "#fff" : "primary.main",
               },
             }}
             key={index}

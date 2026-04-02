@@ -86,17 +86,17 @@ const AllStores = (props) => {
     refetch();
   }, [filteredData]);
   return (
-    <CustomBoxFullWidth>
-      <Grid container spacing={2}>
+    <CustomBoxFullWidth sx={{ pb: 3 }}>
+      <Grid container spacing={2.5}>
         {storeData?.length === 0 && !isLoading && (
-          <EmptySearchResults text="Stores not found!" />
+          <EmptySearchResults text="Ningún puerto encontrado en esta zona" />
         )}
         {storeData?.length > 0 &&
           !isLoading &&
           storeData?.map((item, index) => {
             return (
-              <Grid key={index} item xs={12} sm={6} md={3}>
-                <StoreCard item={item} imageUrl={item?.cover_photo_full_url} />
+              <Grid key={index} item xs={12} sm={6} md={4}>
+                <StoreCard data={item} />
               </Grid>
             );
           })}

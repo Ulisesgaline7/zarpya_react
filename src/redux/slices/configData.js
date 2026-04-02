@@ -2,12 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   configData: null,
-  language: "es",
-  countryCode: "es",
+  language: "",
+  countryCode: "",
   modules: [],
   landingPageData: null,
 };
 
+// Action creators are generated for each case reducer function
 export const configDataSlice = createSlice({
   name: "config-data",
   initialState,

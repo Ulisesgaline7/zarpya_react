@@ -42,6 +42,7 @@ const SomeInfo = (props) => {
             <CustomTypographyBold
               sx={{
                 textTransform: "capitalize",
+                color: "#fff",
               }}
             >
               {t(title)}
@@ -50,6 +51,7 @@ const SomeInfo = (props) => {
               variant="body2"
               sx={{
                 textAlign: "center",
+                color: "rgba(255,255,255,0.7)",
               }}
             >
               {info}
@@ -86,6 +88,7 @@ const SomeInfo = (props) => {
           <CustomTypographyBold
             sx={{
               textTransform: "capitalize",
+              color: "#fff",
             }}
           >
             {t(title)}
@@ -94,6 +97,7 @@ const SomeInfo = (props) => {
             variant="body2"
             sx={{
               textAlign: "center",
+              color: "rgba(255,255,255,0.7)",
             }}
           >
             {info}

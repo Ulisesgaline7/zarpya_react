@@ -51,7 +51,6 @@ const ForgotPassword = ({ configData }) => {
     // Check if reCAPTCHA is already initialized
     if (!window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(
-        auth,
         "recaptcha-container",
         {
           size: "invisible",
@@ -61,7 +60,8 @@ const ForgotPassword = ({ configData }) => {
           "expired-callback": () => {
             window.recaptchaVerifier?.reset();
           },
-        }
+        },
+        auth
       );
     } else {
       // Only reset without re-initializing

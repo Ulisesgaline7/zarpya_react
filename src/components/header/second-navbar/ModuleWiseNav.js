@@ -32,13 +32,11 @@ const ModuleWiseNav = (props) => {
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const { data, refetch } = useGetModule();
 	const { profileInfo } = useSelector((state) => state.profileInfo);
-	const profileImageUrl = profileInfo?.image
-    ? `${getImageUrl(
-        profileInfo?.storage,
-        "customer_image_url",
-        configData
-    )}/${profileInfo?.image}`
-    : null;
+	const profileImageUrl = `${getImageUrl(
+		profileInfo?.storage,
+		"customer_image_url",
+		configData
+	)}/${profileInfo?.image}`;
 	const favIcon = configData?.logo_full_url;
 	const lanDirection = getLanguage();
 	const dispatch = useDispatch();
@@ -144,7 +142,7 @@ const ModuleWiseNav = (props) => {
 							>
 								<Grid
 									item
-									xs={router.pathname === "/home" ? Object.keys(router.query).length > 0 ? 4 : 2 : 4}
+									xs={router.pathname === "/home" ? Object.keys(router.query).length > 0 ? 2 : 2 : 4}
 									sm={4}
 									align="left"
 									justifyItems="flex-start"
@@ -160,8 +158,7 @@ const ModuleWiseNav = (props) => {
 										getIcon()
 									)}
 								</Grid>
-								{location ? (
-									<Grid
+								<Grid
 										item
 										xs={router.pathname === "/home" ? Object.keys(router.query).length > 0 ? 8 : 10 : 8}
 										sm={8}
@@ -173,15 +170,6 @@ const ModuleWiseNav = (props) => {
 											openDrawer={openDrawer}
 										/>
 									</Grid>
-								) : (
-									<Grid
-										item
-										xs={
-											router.pathname === "/home"  ? 2 : 10
-										}
-										sm={11}
-									></Grid>
-								)}
 							</Grid>
 						</CustomBoxFullWidth>
 					</Grid>

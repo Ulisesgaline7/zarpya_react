@@ -1,4 +1,4 @@
-import * as theme from "@mui/system";
+import { createTheme } from "@mui/material/styles";
 
 export const baseThemeOptions = {
   breakpoints: {
@@ -10,7 +10,15 @@ export const baseThemeOptions = {
       xl: 1920,
     },
   },
+
   components: {
+    // ✅ GLOBAL FIX FOR useMediaQuery HYDRATION
+    MuiUseMediaQuery: {
+      defaultProps: {
+        noSsr: true,
+      },
+    },
+
     MuiAvatar: {
       styleOverrides: {
         root: {
@@ -20,6 +28,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiButton: {
       defaultProps: {
         disableElevation: true,
@@ -48,11 +57,13 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,
       },
     },
+
     MuiCardActions: {
       styleOverrides: {
         root: {
@@ -60,6 +71,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiCardContent: {
       styleOverrides: {
         root: {
@@ -70,6 +82,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiCardHeader: {
       defaultProps: {
         titleTypographyProps: {
@@ -85,6 +98,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiCheckbox: {
       defaultProps: {
         color: "primary",
@@ -98,6 +112,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiCssBaseline: {
       styleOverrides: {
         "*": {
@@ -139,6 +154,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiIconButton: {
       styleOverrides: {
         root: {
@@ -150,6 +166,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiLinearProgress: {
       styleOverrides: {
         root: {
@@ -158,11 +175,13 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiLink: {
       defaultProps: {
         underline: "hover",
       },
     },
+
     MuiListItemIcon: {
       styleOverrides: {
         root: {
@@ -173,6 +192,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiOutlinedInput: {
       styleOverrides: {
         input: {
@@ -180,6 +200,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiPaper: {
       styleOverrides: {
         root: {
@@ -187,21 +208,19 @@ export const baseThemeOptions = {
         },
       },
     },
-    MuiPopover: {
-      defaultProps: {
-        // elevation: 16,
-      },
-    },
+
     MuiRadio: {
       defaultProps: {
         color: "primary",
       },
     },
+
     MuiSwitch: {
       defaultProps: {
         color: "primary",
       },
     },
+
     MuiTab: {
       styleOverrides: {
         root: {
@@ -218,6 +237,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiTableCell: {
       styleOverrides: {
         root: {
@@ -225,6 +245,7 @@ export const baseThemeOptions = {
         },
       },
     },
+
     MuiTableHead: {
       styleOverrides: {
         root: {
@@ -245,16 +266,17 @@ export const baseThemeOptions = {
       },
     },
   },
+
   direction: "ltr",
+
   shape: {
     borderRadius: 8,
   },
+
   typography: {
-    button: {
-      fontWeight: 600,
-    },
-    fontFamily: '"Rubik","sans-serif"',
-    //this is default font size for typography
+    fontFamily: '"General Sans", "sans-serif"',
+    button: { fontWeight: 600 },
+
     body1: {
       fontSize: "0.875rem",
       fontWeight: 400,
@@ -298,48 +320,60 @@ export const baseThemeOptions = {
       lineHeight: 1.66,
     },
     h1: {
+      fontFamily: '"Funnel Display", "sans-serif"',
       fontWeight: 700,
       fontSize: "3.5rem",
       lineHeight: 1.375,
     },
     h2: {
+      fontFamily: '"Funnel Display", "sans-serif"',
       fontWeight: 700,
       fontSize: "3rem",
       lineHeight: 1.375,
     },
     h3: {
+      fontFamily: '"Funnel Display", "sans-serif"',
       fontWeight: 700,
       fontSize: "2.25rem",
       lineHeight: 1.375,
     },
     h4: {
+      fontFamily: '"Funnel Display", "sans-serif"',
       fontWeight: 700,
       fontSize: "2rem",
       lineHeight: 1.375,
     },
     h5: {
+      fontFamily: '"Funnel Display", "sans-serif"',
       fontWeight: 600,
       fontSize: "1.5rem",
       lineHeight: 1.375,
     },
     h6: {
+      fontFamily: '"Funnel Display", "sans-serif"',
       fontWeight: 600,
       fontSize: "1.25rem",
       lineHeight: 1.375,
     },
     h7: {
+      fontFamily: '"Funnel Display", "sans-serif"',
       fontWeight: 600,
       fontSize: "1rem",
       lineHeight: 1.375,
     },
     h8: {
+      fontFamily: '"Funnel Display", "sans-serif"',
       fontWeight: 600,
       fontSize: "0.75rem",
       lineHeight: 1.375,
     },
   },
+
   zIndex: {
     appBar: 1200,
     drawer: 1100,
   },
 };
+
+// ✅ CREATE THE THEME
+export const theme = createTheme(baseThemeOptions);

@@ -27,7 +27,7 @@ const FooterBottom = (props) => {
           content: '""',
           position: "absolute",
           inset: "0",
-          background: theme.palette.background.default,
+          background: "transparent",
         },
       }}
     >
@@ -38,10 +38,8 @@ const FooterBottom = (props) => {
         sx={{
           position: "relative",
           zIndex: "1",
-          backgroundColor:
-            getCurrentModuleType() === ModuleTypes?.FOOD
-              ? alpha(theme.palette.moduleTheme.food, 0.051)
-              : alpha(theme.palette.primary.main, 0.051),
+          backgroundColor: "transparent",
+          borderTop: "1px solid rgba(255,255,255,0.1)",
         }}
       >
         <CustomContainer>
@@ -50,8 +48,12 @@ const FooterBottom = (props) => {
             justifyContent={{ xs: "center", sm: "space-between", md: "space-between" }}
             alignItems="center"
           >
-            <Typography width="100%" textAlign={{ xs: "center", md: "start" }}>
-              {configData?.footer_text}
+            <Typography
+              width="100%"
+              textAlign={{ xs: "center", md: "start" }}
+              sx={{ color: "rgba(255,255,255,0.6)", fontSize: "0.875rem" }}
+            >
+              {configData?.footer_text || `© ${new Date().getFullYear()} Zarpya. All rights reserved.`}
             </Typography>
             <>
               {!isXSmall && <FooterBottomItems handleClickToRoute={handleClickToRoute} configData={configData} />}

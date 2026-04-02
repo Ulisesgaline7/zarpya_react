@@ -37,7 +37,7 @@ const SocialLinks = (props) => {
         sx={{
           fontSize: "16px",
           mb: 2,
-          color: (theme) => alpha(theme.palette.neutral[500], 0.8),
+          color: "rgba(255,255,255,0.75)",
         }}
       >
         {landingPageData?.footer_section?.fixed_footer_description}
@@ -58,11 +58,11 @@ const SocialLinks = (props) => {
               <IconButton
                 sx={{
                   padding: "0px",
-                  color: theme.palette.primary.icon,
+                  color: "rgba(255,255,255,0.75)",
                   transition: "all ease 0.5s",
                   "&:hover": {
                     transform: "scale(1.14)",
-                    color: theme.palette.primary.main,
+                    color: "#2FB9CB",
                   },
                 }}
                 key={index}

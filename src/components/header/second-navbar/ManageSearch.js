@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import CustomSearch from "../../custom-search/CustomSearch";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import SearchSuggestionsBottom from "../../search/SearchSuggestionsBottom";
 import { t } from "i18next";
 import { getCurrentModuleType } from "helper-functions/getCurrentModuleType";
@@ -19,6 +19,8 @@ const ManageSearch = ({
   currentTab,
 }) => {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const [openSearchSuggestions, setOpenSearchSuggestions] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -55,14 +57,10 @@ const ManageSearch = ({
         data_type: "searched",
       };
 
-      router.replace(
-        {
-          pathname: router.pathname,
-          query: newQuery,
-        },
-        undefined,
-        { shallow: true }
-      );
+      router.push({
+        pathname: '/search',
+        query: newQuery
+      });
     } else {
       if (remove === "true" && searchQuery) {
         const newQuery = {
@@ -71,9 +69,9 @@ const ManageSearch = ({
           data_type: d_type,
         };
 
-        router.replace(
+        router.push(
           {
-            pathname: router.pathname,
+            pathname: '/search',
             query: newQuery,
           },
           undefined,
@@ -121,6 +119,10 @@ const ManageSearch = ({
       }
     }
   }, [itemOrStoreSuggestionData?.items, itemOrStoreSuggestionData?.stores]);
+
+  useEffect(() => {
+    setOpenSearchSuggestions(false);
+  }, [pathname, searchParams?.toString()]);
   const handleOnFocus = () => {
     if (searchValue === "") {
       setIsEmpty(true);
@@ -149,36 +151,29 @@ const ManageSearch = ({
 
   const dynamicLabel = () => {
     if (getCurrentModuleType() === ModuleTypes.GROCERY) {
-      return `Search for grocery or store...`;
+      return `Busca tu mercado o tienda...`;
     }
     if (getCurrentModuleType() === ModuleTypes.PHARMACY) {
-      return `Search for medicine or store...`;
+      return `Busca farmacia o medicamento...`;
     }
     if (getCurrentModuleType() === ModuleTypes.ECOMMERCE) {
-      return `Search for products or store...`;
+      return `Busca productos o tiendas...`;
     }
   };
 
   const getModuleWiseSearch = () => {
     if (getCurrentModuleType() === ModuleTypes.FOOD) {
       return (
-        <Box
-          sx={{
-            backgroundColor: (theme) =>
-              alpha(theme.palette.moduleTheme.food, 0.4),
-            padding: { xs: "8px", md: "16px" },
-            borderRadius: "2px",
-          }}
-        >
+       
           <CustomSearch
-            label={t("Search foods and restaurants...")}
+            label={t("Busca restaurantes y platillos...")}
             handleSearchResult={handleKeyPress}
             selectedValue={searchQuery}
             setIsEmpty={setIsEmpty}
             handleOnFocus={handleOnFocus}
             setSearchValue={setSearchValue}
           />
-        </Box>
+        
       );
     } else {
       return (
@@ -193,6 +188,7 @@ const ManageSearch = ({
       );
     }
   };
+console.log({openSearchSuggestions});
 
   return (
     <Box
@@ -208,7 +204,7 @@ const ManageSearch = ({
       onFocus={() => handleOnFocus()}
       ref={searchRef}
     >
-      {zoneid && router.pathname !== "/" && (
+      {router.pathname !== "/" && (
         <>
           {getModuleWiseSearch()}
           {openSearchSuggestions && (

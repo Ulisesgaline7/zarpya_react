@@ -31,7 +31,6 @@ export const setUpRecaptcha = () => {
   if (document.getElementById("recaptcha-container")) {
     if (!window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(
-        auth,
         "recaptcha-container",
         {
           size: "invisible",
@@ -41,7 +40,8 @@ export const setUpRecaptcha = () => {
           "expired-callback": () => {
             window.recaptchaVerifier?.reset();
           },
-        }
+        },
+        auth
       );
     } else {
       window.recaptchaVerifier.clear();

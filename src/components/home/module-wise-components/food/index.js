@@ -22,6 +22,8 @@ import VisitAgain from "../../visit-again";
 import FeaturedCategoriesWithFilter from "../ecommerce/FeaturedCategoriesWithFilter";
 import TopOffersNearMe from "components/home/top-offers-nearme";
 import RecommendedStore from "components/home/recommended-store";
+import FeaturesSection from "components/home/features-section";
+import AppDownloadCTA from "components/home/app-download-cta";
 
 const FoodModule = (props) => {
   const { configData } = props;
@@ -78,6 +80,9 @@ const FoodModule = (props) => {
         </CustomContainer>
       </Grid>
       <Grid item xs={12}>
+        <FeaturesSection />
+      </Grid>
+      <Grid item xs={12}>
         <CustomContainer>
           <RecommendedStore/>
         </CustomContainer>
@@ -108,12 +113,12 @@ const FoodModule = (props) => {
       </Grid>
       <Grid item xs={12}>
         <CustomContainer>
-          <SpecialFoodOffers title="Special Food Offers" />
+          <SpecialFoodOffers title="Ofertas especiales del día" />
         </CustomContainer>
       </Grid>
       <Grid item xs={12}>
         <CustomContainer>
-          <TopOffersNearMe title="Top offers near me" />
+          <TopOffersNearMe title="Ofertas que zarparán pronto" />
         </CustomContainer>
       </Grid>
 
@@ -124,7 +129,7 @@ const FoodModule = (props) => {
       </Grid>
       <Grid item xs={12}>
         <CustomContainer>
-          <BestReviewedItems title="Best Reviewed Items" info={data} />
+          <BestReviewedItems title="Los mejor calificados" info={data} />
         </CustomContainer>
       </Grid>
       <Grid item xs={12}>
@@ -145,13 +150,16 @@ const FoodModule = (props) => {
       </Grid>
       <Grid item xs={12}>
         <CustomContainer>
-          <FeaturedCategoriesWithFilter title="Featured Categories" />
+          <FeaturedCategoriesWithFilter title="Explora por categoría" />
         </CustomContainer>
       </Grid>
       <Grid item xs={12}>
         <CustomContainer>
           <Stores />
         </CustomContainer>
+      </Grid>
+      <Grid item xs={12}>
+        <AppDownloadCTA />
       </Grid>
       {orderDetailsModalOpen && !token && (
         <OrderDetailsModal orderDetailsModalOpen={orderDetailsModalOpen} />

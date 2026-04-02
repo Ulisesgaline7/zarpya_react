@@ -5,6 +5,9 @@ import { bengali } from "./bn";
 import { arabic } from "./ar";
 import { spain } from "./es";
 
+// the translations
+// (tip move them in a JSON file and import them,
+// or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
 const resources = {
   en: {
     translation: english,
@@ -12,21 +15,22 @@ const resources = {
   es: {
     translation: spain,
   },
+  bn: {
+    translation: bengali,
+  },
+  ar: {
+    translation: arabic,
+  },
 };
 
-const savedLanguage =
-  typeof window !== "undefined"
-    ? JSON.parse(localStorage.getItem("language-setting")) || "es"
-    : "es";
-
 i18n
-  .use(initReactI18next)
+  .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    lng: savedLanguage,
-    fallbackLng: "es",
+    lng: "en", // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
+    fallbackLng: "en",
     interpolation: {
-      escapeValue: false,
+      escapeValue: false, // react already safes from xss
     },
   });
 

@@ -1,4 +1,6 @@
 import ArrowForwardSharpIcon from "@mui/icons-material/ArrowForwardSharp";
+import { handleStoreRedirect } from "helper-functions/handleStoreRedirect";
+
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import StarIcon from "@mui/icons-material/Star";
 import {
@@ -171,16 +173,7 @@ const AdsCard = (props) => {
   }, [ended, index, itemLength, sliderRef]);
   const handleClick = (e) => {
     e.stopPropagation();
-    router.push({
-      pathname: `/store/[id]`,
-      query: {
-        id: `${item?.store?.slug ? item?.store?.slug : item?.store?.id}`,
-        module_id: `${item?.store?.module_id}`,
-        module_type: getCurrentModuleType(),
-        store_zone_id: `${item?.store?.zone_id}`,
-        distance: item?.store?.distance,
-      },
-    });
+    handleStoreRedirect(item?.store, router);
   };
 
   return (

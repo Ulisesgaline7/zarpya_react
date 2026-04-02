@@ -13,6 +13,7 @@ import { HomeComponentsWrapper } from "../HomePageComponents";
 import { createEnhancedArrows } from "../../common/EnhancedSliderArrows";
 import StoreCard from "components/cards/StoreCard";
 import { useGetRecommendStores } from "api-manage/hooks/react-query/store/useGetRecommendStores";
+import SectionHeader from "components/home/section-header";
 
 
 
@@ -151,18 +152,7 @@ const RecommendedStore = () => {
     return (
 
       <>
-        <CustomStackFullWidth
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          pb=".7rem"
-        >
-          {popularIsLoading ? (
-            <Skeleton variant="text" width="110px" />
-          ) : (
-            <H2 text={t("Tienda recomendada")} component="h2" />
-          )}
-        </CustomStackFullWidth>
+        <SectionHeader title="Recomendados para ti" />
         {sliderItems}
 
       </>
@@ -172,10 +162,9 @@ const RecommendedStore = () => {
 
   return (
     <HomeComponentsWrapper sx={{ paddingTop: "5px", gap: "1rem" }}>
-      {getLayout()}
+      {popularData?.stores?.length > 0 ? getLayout() : null}
     </HomeComponentsWrapper>
   );
 };
 
 export default RecommendedStore
-

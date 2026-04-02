@@ -40,7 +40,7 @@ const AddressReselectPopover = (props) => {
     }
     setGeoLocationEnable(true);
     setZoneIdEnabled(true);
-    window.reload()
+    window.location.reload();
   };
 
   const handleSetLocation = async () => {
@@ -137,7 +137,7 @@ const AddressReselectPopover = (props) => {
                 <CustomAlert
                   type="info"
                   text={t(
-                    "Para seleccionar de direcciones guardadas, necesitas iniciar sesión."
+                    "To select from saved addresses, you need to sign in."
                   )}
                 />
               )}

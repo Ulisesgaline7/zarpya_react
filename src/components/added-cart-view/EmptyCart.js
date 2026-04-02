@@ -36,12 +36,12 @@ const EmptyCart = ({ setSideDrawerOpen, cartList, text, icon, subTitle }) => {
           )}
         </EmptyCartBox>
         <CustomTypographyBold align="center">
-          {t("Tu carrito está vacío")}
+          {t("Your cart is empty")}
         </CustomTypographyBold>
         <Typography fontSize="14px" width="300px" align="center">
           {subTitle ??
             t(
-              "No hay artículos en tu carrito. Por favor agrega productos a tu lista."
+              "No items added in your cart. Please add product to your cart list."
             )}
         </Typography>
       </Stack>

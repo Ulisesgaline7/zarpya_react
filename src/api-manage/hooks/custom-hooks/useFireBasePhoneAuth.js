@@ -12,7 +12,6 @@ const useFirebasePhoneAuth = () => {
   const setUpRecaptcha = () => {
     if (!window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(
-        auth,
         "recaptcha-container",
         {
           size: "invisible",
@@ -20,7 +19,8 @@ const useFirebasePhoneAuth = () => {
           "expired-callback": () => {
             window.recaptchaVerifier?.reset();
           },
-        }
+        },
+        auth
       );
     } else {
       window.recaptchaVerifier?.clear();

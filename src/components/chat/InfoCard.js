@@ -11,8 +11,8 @@ import moment from "moment";
 
 export const StyledBadge = styled(Badge)(({ theme }) => ({
 	"& .MuiBadge-badge": {
-		backgroundColor: "#00CCBC",
-		color: "#00CCBC",
+		backgroundColor: "#44b700",
+		color: "#44b700",
 		boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
 		"&::after": {
 			position: "absolute",

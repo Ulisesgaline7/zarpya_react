@@ -14,6 +14,7 @@ import Slider from "react-slick";
 
 import { useGetPopularStoreWithoutInfiniteScroll } from "api-manage/hooks/react-query/store/useGetPopularStore";
 import { getCurrentModuleType } from "helper-functions/getCurrentModuleType";
+import { getStoreRedirectURL } from "helper-functions/handleStoreRedirect";
 import { ModuleTypes } from "helper-functions/moduleTypes";
 import { setNewArrivalStores } from "redux/slices/storedData";
 import "slick-carousel/slick/slick.css";
@@ -26,6 +27,7 @@ import { HomeComponentsWrapper } from "../HomePageComponents";
 import Menus from "../best-reviewed-items/Menus";
 import { foodNewArrivalsettings, settings } from "./sliderSettings";
 import NextImage from "components/NextImage";
+import SectionHeader from "components/home/section-header";
 
 const ImageWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
@@ -158,17 +160,7 @@ const NewArrivalStores = () => {
         <>
           {newArrivalStores && newArrivalStores.length > 0 && (
             <>
-              <CustomStackFullWidth
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                {isLoading ? (
-                  <Skeleton variant="text" width="110px" />
-                ) : (
-                  <H2 text={t("New Arrival Restaurants")} component="h2" />
-                )}
-              </CustomStackFullWidth>
+              <SectionHeader title="Recién zarpados" subtitle="Los nuevos en la flota" />
               <SliderWrapper
                 float="left"
                 sx={{
@@ -183,15 +175,7 @@ const NewArrivalStores = () => {
                     return (
                       <Box key={index}>
                         <Link
-                          href={{
-                            pathname: `/store/[id]`,
-                            query: {
-                              id: `${item?.id}`,
-                              module_id: `${moduleId}`,
-                              module_type: getCurrentModuleType(),
-                              store_zone_id: `${item?.zone_id}`,
-                            },
-                          }}
+                          href={getStoreRedirectURL(item)}
                         >
                           <ImageWrapper>
                             <Box
@@ -235,16 +219,12 @@ const NewArrivalStores = () => {
         <>
           {popularData && popularData?.stores?.length > 0 && (
             <>
+              <SectionHeader title="Recién zarpados" subtitle="Los nuevos en la flota" />
               <CustomStackFullWidth
                 direction="row"
                 alignItems="center"
-                justifyContent="space-between"
+                justifyContent="flex-end"
               >
-                {isLoading ? (
-                  <Skeleton variant="text" width="110px" />
-                ) : (
-                  <H2 text={t("Best Store Nearby")} component="h2" />
-                )}
                 <Menus
                   selectedMenuIndex={selectedMenuIndex}
                   setSelectedMenuIndex={handleMenuClick}

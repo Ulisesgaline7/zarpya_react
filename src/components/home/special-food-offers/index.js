@@ -14,6 +14,7 @@ import { RTL } from "../../rtl";
 import SpecialOfferCardShimmer from "../../Shimmer/SpecialOfferCardSimmer";
 import H2 from "../../typographies/H2";
 import { createEnhancedArrows } from "../../common/EnhancedSliderArrows";
+import SectionHeader from "components/home/section-header";
 import { HomeComponentsWrapper } from "../HomePageComponents";
 import { useRouter } from "next/router";
 
@@ -103,10 +104,10 @@ const SpecialFoodOffers = ({ title }) => {
   };
   const navigateToHome = () => {
     router.push({
-      pathname: '/home',
+      pathname: '/search',
       query: {
         search: "special-offer",
-        module_id: getModuleId(),
+      
         data_type: "discounted",
       },
     }).then(() => {
@@ -135,36 +136,7 @@ const SpecialFoodOffers = ({ title }) => {
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
           >
-            <CustomStackFullWidth
-              alignItems="center"
-              justifyContent="space-between"
-              direction="row"
-            >
-              {isFetching ? (
-                <Skeleton variant="text" width="110px" />
-              ) : (
-                <H2 text={title ? title : t("Special Offer")} component="h2" />
-              )}
-              {isFetching ? (
-                <Skeleton width="100px" variant="80px" />
-              ) : (
-
-                <Button
-                  onClick={navigateToHome}
-                  variant="text"
-                  sx={{
-                    transition: "all ease 0.5s",
-                    textTransform: "capitalize",
-                    "&:hover": {
-                      letterSpacing: "0.03em",
-                    },
-                  }}
-                >
-                  {t("View all")}
-                </Button>
-                // </Link>
-              )}
-            </CustomStackFullWidth>
+            <SectionHeader title={title || "Ofertas especiales del día"} />
             <RTL direction={lanDirection}>
               <CustomBoxFullWidth
                 sx={{

@@ -1,6 +1,8 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { alpha, styled, Typography } from "@mui/material";
+import { handleStoreRedirect } from "helper-functions/handleStoreRedirect";
+
 import { Box } from "@mui/system";
 import { useAddStoreToWishlist } from "api-manage/hooks/react-query/wish-list/useAddStoreToWishLists";
 import { useWishListStoreDelete } from "api-manage/hooks/react-query/wish-list/useWishListStoreDelete";
@@ -122,17 +124,7 @@ const NearbyStoreCard = (props) => {
     }
   };
   const handleClick = () => {
-    router.push({
-      pathname: `/store/[id]`,
-      query: {
-        id: `${item?.slug ? item?.slug : item?.id}`,
-        module_id: `${moduleId}`,
-        // lat: currentLocation?.lat,
-        // lng: currentLocation?.lng,
-        distance: item.distance,
-        store_zone_id: `${item?.zone_id}`,
-      },
-    });
+    handleStoreRedirect(item, router, moduleId);
   };
   const addToWishlistHandler = (e) => {
     e.stopPropagation();

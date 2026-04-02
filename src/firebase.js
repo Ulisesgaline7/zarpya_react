@@ -8,23 +8,27 @@ import {
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC9zEEGTgCQqMNgt6glRtnBEFzJ3PXYAKY",
-  authDomain: "dropi-8c905.firebaseapp.com",
-  projectId: "dropi-8c905",
-  storageBucket: "dropi-8c905.firebasestorage.app",
-  messagingSenderId: "756666575531",
-  appId: "1:756666575531:web:bfda7873909395c5abe5ee",
-  measurementId: "G-LPSL9D520G"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
 };
 
-const firebaseApp = !getApps().length
-  ? initializeApp(firebaseConfig)
-  : getApp();
+const isFirebaseConfigured = !!firebaseConfig.apiKey;
 
-export const auth = getAuth(firebaseApp);
+const firebaseApp = isFirebaseConfigured
+  ? !getApps().length
+    ? initializeApp(firebaseConfig)
+    : getApp()
+  : null;
+
+export const auth = isFirebaseConfigured ? getAuth(firebaseApp) : null;
 
 // Correctly export a promise that resolves to messaging instance (or null)
 export const getMessagingObject = async () => {
+  if (!isFirebaseConfigured) return null;
   try {
     const isSupportedBrowser = await isSupported();
     if (isSupportedBrowser) {
@@ -45,7 +49,7 @@ export const fetchToken = async (setTokenFound, setFcmToken) => {
 
     const currentToken = await getToken(messaging, {
       vapidKey:
-        "BDG_tKBdY4ImyVYhHw1hYaB-Vo5lS_PxBh0Ax5W-aqkXeVJ_3Kp8VowZP0Pehp5xptR-vPD7RxjrIf2mPiDcAyg",
+        "",
     });
 
     if (currentToken) {

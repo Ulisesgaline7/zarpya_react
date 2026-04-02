@@ -13,6 +13,7 @@ import { RTL } from "../../rtl";
 import SpecialOfferCardShimmer from "../../Shimmer/SpecialOfferCardSimmer";
 import H2 from "../../typographies/H2";
 import { createEnhancedArrows } from "../../common/EnhancedSliderArrows";
+import SectionHeader from "components/home/section-header";
 import { HomeComponentsWrapper } from "../HomePageComponents";
 import CustomContainer from "components/container";
 import useGetTopOffers from "api-manage/hooks/react-query/product-details/useGetTopOffers";
@@ -148,47 +149,7 @@ const TopOffersNearMe = ({ title}) => {
             onMouseLeave={() => setIsHover(false)}
           >
             <CustomContainer>
-              <CustomStackFullWidth
-                alignItems="center"
-                justifyContent="space-between"
-                direction="row"
-                marginTop={{ xs: "10px" }}
-              >
-                {isFetching ? (
-                  <Skeleton variant="text" width="110px" />
-                ) : (
-                  <Stack direction="row" spacing={1} alignItems="center">
-                    <CustomImageContainer
-                      src={fire_image.src}
-                      width="26px"
-                      height="26px"
-                    />
-                    <H2 text={title ? title : t("Special Offer")} />
-                  </Stack>
-                )}
-                {isFetching  ? (
-                  <Skeleton width="100px" variant="80px" />
-                ) : (
-                  <Link
-                    href={{
-                      pathname: "/store/top-offer-nearby",
-                    }}
-                  >
-                    <Button
-                      sx={{
-                        transition: "all ease 0.5s",
-                        textTransform: "capitalize",
-                        "&:hover": {
-                          letterSpacing: "0.03em",
-                        },
-                        padding: { xs: "0px 0px", md: "9px 16px" },
-                      }}
-                    >
-                      {t("See all")}
-                    </Button>
-                  </Link>
-                )}
-              </CustomStackFullWidth>
+              <SectionHeader title={title || "Ofertas que zarparán pronto"} href="/store/top-offer-nearby" />
             </CustomContainer>
             <RTL direction={lanDirection}>
               <CustomBoxFullWidth

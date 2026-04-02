@@ -22,206 +22,139 @@ import FaqTabSection from "./FaqTabSection";
 
 const MapModal = dynamic(() => import("../Map/MapModal"));
 
-// Sección con animación de entrada al hacer scroll
-const Section = ({ children, background, py = "5rem" }) => (
-  <Box
-    component="section"
-    sx={{
-      background,
-      py,
-      // Entrada suave al cargar
-      animation: "fadeInUp 0.6s ease both",
-    }}
-  >
-    {children}
-  </Box>
-);
-
-// Divisor minimalista entre secciones
-const Divider = () => (
-  <Box
-    sx={{
-      width: "48px",
-      height: "2px",
-      borderRadius: "2px",
-      background: (theme) => alpha(theme.palette.primary.main, 0.25),
-      margin: "0 auto",
-    }}
-  />
-);
-
 const LandingPage = ({ configData, landingPageData }) => {
-  const Testimonials = dynamic(() => import("./Testimonials"), { ssr: false });
+  const Testimonials = dynamic(() => import("./Testimonials"), {
+    ssr: false,
+  });
 
+  // console.log({data})
   const [location, setLocation] = useState(undefined);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { coords } = useGeolocated({
-    positionOptions: { enableHighAccuracy: false },
+    positionOptions: {
+      enableHighAccuracy: false,
+    },
     userDecisionTimeout: 5000,
     isGeolocationEnabled: true,
   });
-
   useEffect(() => {
     setLocation(JSON.stringify(localStorage.getItem("location")));
   }, []);
-
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false)
+  };
   const router = useRouter();
-
   const handleOrderNow = () => {
     if (location) {
-      location === "null" ? setOpen(true) : router.push("/home", undefined, { shallow: true });
+      if (location === "null") {
+        setOpen(true);
+      } else {
+        router.push("/home", undefined, { shallow: true });
+      }
     } else {
       setOpen(true);
     }
   };
+  let zoneid = null;
+  if (typeof window !== "undefined") {
+    zoneid = localStorage.getItem("zoneid");
+  }
+  console.log({ landingPageData });
 
-  // Fondos alternos minimalistas
-  const bgWhite = theme.palette.background.paper;
-  const bgGray  = theme.palette.mode === "dark"
-    ? "rgba(255,255,255,0.02)"
-    : "#f9fafb";
-  const bgGreen = theme.palette.mode === "dark"
-    ? "rgba(3,157,85,0.06)"
-    : "rgba(3,157,85,0.04)";
 
   return (
     <>
       <PushNotificationLayout>
-
-        {/* ── Hero ── */}
         <HeroSection landingPageDataheroSection={landingPageData?.hero_section} />
-
-        {/* ── Stats ── */}
-        {landingPageData?.trust_section?.trust_section_status === 1 && (
-          <>
-            <Divider />
-            <Section background={bgWhite} py={{ xs: "3rem", md: "4rem" }}>
-              <StatsSection trustSectionData={landingPageData?.trust_section} />
-            </Section>
-          </>
-        )}
-
-        {/* ── Zonas disponibles ── */}
-        {landingPageData?.available_zone_section?.available_zone_status === 1 &&
-          landingPageData?.available_zone_section?.available_zone_list?.length > 0 && (
-          <>
-            <Divider />
-            <Section background={bgGray}>
-              <AvailableZoneSection zoneSection={landingPageData?.available_zone_section} />
-            </Section>
-          </>
-        )}
-
-        {/* ── Banners promocionales ── */}
-        {Number(landingPageData?.promotional_banner_section?.promotion_banner_section_status) === 1 && (
-          <Section background={bgWhite} py={{ xs: "2rem", md: "3rem" }}>
-            <Banners
-              promotionalBanner={landingPageData?.promotional_banner_section?.promotion_banners_full_url}
-              isSmall={isSmall}
+        {landingPageData?.trust_section?.trust_section_status === 1 ? (
+          <StatsSection trustSectionData={landingPageData?.trust_section} />
+        ) : null}
+        {landingPageData?.available_zone_section
+          ?.available_zone_status === 1 &&
+          landingPageData?.available_zone_section?.available_zone_list?.length > 0 ? (
+          <AvailableZoneSection zoneSection={landingPageData?.available_zone_section} />
+        ) : null}
+        {Number(landingPageData?.promotional_banner_section?.promotion_banner_section_status) === 1 ? (
+          <Box sx={{ background: theme => theme.palette.neutral[100] }}>
+            <Banners promotionalBanner={landingPageData?.promotional_banner_section?.promotion_banners_full_url} isSmall={isSmall} />
+          </Box>
+        ) : null}
+        {landingPageData?.user_app_download_section?.download_user_app_section_status === 1 ? (
+          <Box sx={{ background: "linear-gradient(1.02deg, rgba(3, 157, 85, 0.1) -12.87%, rgba(3, 157, 85, 0.02) 99.13%)" }}>
+            <ComponentTwo
+              user_app_download_section={landingPageData?.user_app_download_section}
             />
-          </Section>
-        )}
-
-        {/* ── Descarga app usuario ── */}
-        {landingPageData?.user_app_download_section?.download_user_app_section_status === 1 && (
-          <>
-            <Divider />
-            <Section background={bgGreen}>
-              <ComponentTwo user_app_download_section={landingPageData?.user_app_download_section} />
-            </Section>
-          </>
-        )}
-
-        {/* ── Clientes populares + Registro vendedor ── */}
-        <Section background={bgGray}>
+          </Box>
+        ) : null}
+        <Box sx={{ background: theme => theme.palette.neutral[100], pb: "2rem" }}>
           <CustomContainer>
             {Number(landingPageData?.popular_client_section?.popular_client_section_status) === 1 && (
               <ClientSection popular_client_section={landingPageData?.popular_client_section} />
             )}
-            {landingPageData?.seller_app_download_section?.download_seller_app_section_status === 1 && (
-              <>
-                <Box sx={{ mt: 4 }} />
-                <Registration
-                  configData={configData}
-                  seller_app_download_section={landingPageData?.seller_app_download_section}
-                  isSmall={isSmall}
-                />
-              </>
-            )}
+
+            {landingPageData?.seller_app_download_section?.download_seller_app_section_status === 1 ? (
+              <Registration
+                configData={configData}
+                seller_app_download_section={landingPageData?.seller_app_download_section}
+                isSmall={isSmall}
+              />
+            ) : null}
+
           </CustomContainer>
-        </Section>
-
-        {/* ── Descarga app repartidor ── */}
-        {landingPageData?.deliveryman_app_download_section?.download_deliveryman_app_section_status === 1 && (
-          <>
-            <Divider />
-            <Section background={bgWhite}>
-              <CustomContainer>
-                <DeliveryManAppDownload deliveryManApp={landingPageData?.deliveryman_app_download_section} />
-              </CustomContainer>
-            </Section>
-          </>
-        )}
-
-        {/* ── Banner descuento + Testimonios ── */}
-        <Section background={bgGray}>
-          {landingPageData?.banner_section?.banner_section_status && (
+        </Box>
+        {landingPageData?.deliveryman_app_download_section?.download_deliveryman_app_section_status === 1 ? (
+          <Box >
+            <CustomContainer>
+              <DeliveryManAppDownload deliveryManApp={landingPageData?.deliveryman_app_download_section} />
+            </CustomContainer>
+          </Box>
+        ) : null}
+        <Box sx={{ background: theme => theme.palette.neutral[100] }}>
+          {landingPageData?.banner_section?.banner_section_status ? (
             <DiscountBanner
               bannerImage={landingPageData?.banner_section?.banner_iamge_full_url}
               isSmall={isSmall}
             />
-          )}
-          {landingPageData?.testimonial_section?.testimonial_section_status === 1 && (
-            <Box sx={{ mt: landingPageData?.banner_section?.banner_section_status ? 4 : 0 }}>
-              <Testimonials
-                handleOrderNow={handleOrderNow}
-                testimonial_section={landingPageData?.testimonial_section}
-                isSmall={isSmall}
-              />
-            </Box>
-          )}
-        </Section>
+          ) : null}
+          {landingPageData?.testimonial_section?.testimonial_section_status === 1 ? (
+            <Testimonials handleOrderNow={handleOrderNow} testimonial_section={landingPageData?.testimonial_section} isSmall={isSmall} />
+          ) : null}
 
-        {/* ── Galería ── */}
-        {landingPageData?.gallery_section && (
-          <>
-            <Divider />
-            <Section background={bgGreen}>
-              <GallerySection gallery_section={landingPageData?.gallery_section} />
-            </Section>
-          </>
-        )}
-
-        {/* ── Highlight ── */}
-        {landingPageData?.highlight_section?.highlight_section_status === 1 && (
-          <Section background={bgWhite}>
-            <CustomContainer>
-              <ImageTitleSection highlight_section={landingPageData?.highlight_section} />
-            </CustomContainer>
-          </Section>
-        )}
-
-        {/* ── FAQ ── */}
-        <Section background={bgGray} py={{ xs: "3rem", md: "5rem" }}>
+        </Box>
+        {landingPageData?.gallery_section ? (
+          <Box sx={{ background: "linear-gradient(1.02deg, rgba(3, 157, 85, 0.1) -12.87%, rgba(3, 157, 85, 0.02) 99.13%)" }}>
+            <GallerySection gallery_section={landingPageData?.gallery_section} />
+          </Box>
+        ) : null}
+        {landingPageData?.highlight_section?.highlight_section_status === 1 ? (
           <CustomContainer>
-            <FaqTabSection faq_section={landingPageData?.faq_section} />
+            <ImageTitleSection highlight_section={landingPageData?.highlight_section} />
           </CustomContainer>
-        </Section>
+        ) : null}
+        <CustomContainer>
+          <FaqTabSection faq_section={landingPageData?.faq_section} />
+        </CustomContainer>
 
-        <Box sx={{ mb: { xs: "2rem", md: "4rem" } }} />
-
+        <Box sx={{
+          mb: {
+            xs: "0rem",
+            md: "6rem"
+          }
+        }}></Box>
         {open && (
-          <MapModal open={open} handleClose={handleClose} coords={coords} disableAutoFocus />
+          <MapModal
+            open={open}
+            handleClose={handleClose}
+            coords={coords}
+            disableAutoFocus
+          />
         )}
-
         <NoSsr>
           <CookiesConsent text={configData?.cookies_text} />
         </NoSsr>
-
       </PushNotificationLayout>
     </>
   );

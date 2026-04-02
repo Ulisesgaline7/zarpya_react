@@ -1,18 +1,18 @@
 importScripts(
-  "https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"
+  "https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"
 );
 importScripts(
-  "https://www.gstatic.com/firebasejs/10.0.0/firebase-messaging-compat.js"
+  "https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js"
 );
 // // Initialize the Firebase app in the service worker by passing the generated config
 const firebaseConfig = {
-  apiKey: "AIzaSyC9zEEGTgCQqMNgt6glRtnBEFzJ3PXYAKY",
-  authDomain: "dropi-8c905.firebaseapp.com",
-  projectId: "dropi-8c905",
-  storageBucket: "dropi-8c905.firebasestorage.app",
-  messagingSenderId: "756666575531",
-  appId: "1:756666575531:web:bfda7873909395c5abe5ee",
-  measurementId: "G-LPSL9D520G"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
 };
 
 firebase?.initializeApp(firebaseConfig);

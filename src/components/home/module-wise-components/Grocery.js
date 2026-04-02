@@ -24,6 +24,8 @@ import VisitAgain from "../visit-again";
 import PharmacyStaticBanners from "./pharmacy/pharmacy-banners/PharmacyStaticBanners";
 import TopOffersNearMe from "../top-offers-nearme";
 import RecommendedStore from "components/home/recommended-store";
+import FeaturesSection from "components/home/features-section";
+import AppDownloadCTA from "components/home/app-download-cta";
 
 const menus = ["All", "Beauty", "Bread & Juice", "Drinks", "Milks"];
 const Grocery = (props) => {
@@ -72,6 +74,9 @@ const Grocery = (props) => {
         </CustomContainer>
       </Grid>
       <Grid item xs={12}>
+        <FeaturesSection />
+      </Grid>
+      <Grid item xs={12}>
         <CustomContainer>
           <RecommendedStore />
         </CustomContainer>
@@ -106,8 +111,8 @@ const Grocery = (props) => {
       <Grid item xs={12}>
         <CustomContainer>
           <PopularItemsNearby
-            title="Most Popular Items"
-            subTitle="We provide best quality & fresh grocery items near your location"
+            title="Lo más pedido cerca tuyo"
+            subTitle="Los productos más frescos y mejor valorados en tu zona"
           />
         </CustomContainer>
       </Grid>
@@ -123,7 +128,7 @@ const Grocery = (props) => {
       </Grid>
       <Grid item xs={12}>
         <CustomContainer>
-          <TopOffersNearMe title="Top offers near me" />
+          <TopOffersNearMe title="Ofertas que zarparán pronto" />
         </CustomContainer>
       </Grid>
       <Grid item xs={12}>
@@ -135,7 +140,7 @@ const Grocery = (props) => {
         <CustomContainer>
           <BestReviewedItems
             menus={menus}
-            title="Best Reviewed Items"
+            title="Los mejor calificados"
             bannerIsLoading={isLoading}
             info={data}
           />
@@ -176,6 +181,9 @@ const Grocery = (props) => {
         <CustomContainer>
           <Stores />
         </CustomContainer>
+      </Grid>
+      <Grid item xs={12}>
+        <AppDownloadCTA />
       </Grid>
       {orderDetailsModalOpen && !token && (
         <OrderDetailsModal

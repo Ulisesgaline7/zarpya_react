@@ -1,10 +1,7 @@
-import { Grid, Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Grid, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { Box, alpha } from "@mui/system";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ractangle from "../../../../public/static/footer/Rectangle.svg";
-import magnifying from "../../../../public/static/footer/magnifying.svg";
-import phone from "../../../../public/static/footer/phone.svg";
 import { getCurrentModuleType } from "helper-functions/getCurrentModuleType";
 import { ModuleTypes } from "helper-functions/moduleTypes";
 import { CustomStackFullWidth } from "styled-components/CustomStyles.style";
@@ -12,234 +9,180 @@ import CustomImageContainer from "../../CustomImageContainer";
 import AppLinks from "./AppLinks";
 import RouteLinks from "./RouteLinks";
 import SocialLinks from "./SocialLinks";
-import SomeInfo from "./SomeInfo";
 import FooterBottomItems from "../FooterBottomItems";
 import { useRouter } from "next/router";
 import LocationViewOnMap from "../../Map/location-view/LocationViewOnMap";
-import { getImageUrl } from "utils/CustomFunctions";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 
 const FooterMiddle = (props) => {
   const { configData, landingPageData } = props;
   const router = useRouter();
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const handleOpenCloseMap = () => {
-    setOpen(!open);
-  };
+  const handleOpenCloseMap = () => setOpen(!open);
   const handleClickToRoute = (href) => {
     router.push(href, undefined, { shallow: true });
   };
-  let zoneid = undefined;
-  if (typeof window !== "undefined") {
-    zoneid = localStorage.getItem("zoneid");
-  }
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
-  let token;
   const businessLogo = configData?.logo_full_url;
-  // console.log("landingPageData", landingPageData);
+
+  const contactItems = [
+    {
+      icon: <EmailOutlinedIcon sx={{ fontSize: 16, color: "#2FB9CB", flexShrink: 0 }} />,
+      label: configData?.email,
+      href: `mailto:${configData?.email}`,
+    },
+    {
+      icon: <PhoneOutlinedIcon sx={{ fontSize: 16, color: "#2FB9CB", flexShrink: 0 }} />,
+      label: configData?.phone,
+      href: `tel:${configData?.phone}`,
+    },
+    {
+      icon: <LocationOnOutlinedIcon sx={{ fontSize: 16, color: "#2FB9CB", flexShrink: 0 }} />,
+      label: configData?.address,
+      href: null,
+      onClick: handleOpenCloseMap,
+    },
+  ];
+
   return (
-    <CustomStackFullWidth sx={{ py: { xs: "10px", sm: "3rem" } }}>
-      <Grid container spacing={{ xs: 3, md: 4 }} justifyContent="flex-start">
-        <Grid item xs={12} sm={6} md={4.2}>
-          <CustomStackFullWidth
-            // spacing={2}
-            gap="10px"
-            alignItems={{ xs: "center", sm: "flex-start" }}
-            justifyContent="flex-start"
-          >
+    <CustomStackFullWidth sx={{ py: { xs: "28px", sm: "48px" } }}>
+      <Grid container spacing={{ xs: 4, md: 5 }}>
+
+        {/* Column 1: Logo + description + social + apps */}
+        <Grid item xs={12} sm={6} md={4}>
+          <Stack spacing={2.5} alignItems={{ xs: "center", sm: "flex-start" }}>
             <Box
               sx={{
-                img: {
-                  transition: "all ease 0.5s",
-                },
-                "&:hover": {
-                  img: {
-                    transform: "scale(1.04)",
-                  },
-                },
+                "& img": { filter: "brightness(0) invert(1)", maxHeight: "44px" },
               }}
             >
               <CustomImageContainer
                 src={businessLogo}
-                alt={`${configData?.business_name}`}
+                alt={configData?.business_name}
                 width="auto"
-                height="50px"
+                height="44px"
                 objectfit="contain"
               />
             </Box>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "rgba(255,255,255,0.6)",
+                maxWidth: "280px",
+                lineHeight: 1.7,
+                textAlign: { xs: "center", sm: "left" },
+              }}
+            >
+              {configData?.business_description ||
+                "Zarpa con nosotros. Delivery rápido, fácil y seguro a tu puerta."}
+            </Typography>
             <SocialLinks
               configData={configData}
               landingPageData={landingPageData}
             />
-            <AppLinks landingPageData={{
-              app_store_link: landingPageData?.user_app_download_section?.download_user_app_links?.apple_store_url,
-              play_store_link: landingPageData?.user_app_download_section?.download_user_app_links?.playstore_url,
-              app_status: landingPageData?.user_app_download_section?.download_user_app_links?.apple_store_url_status,
-              play_status: landingPageData?.user_app_download_section?.download_user_app_links?.playstore_url_status
-            }} />
-          </CustomStackFullWidth>
-        </Grid>
-        <Grid item xs={12} sm={6} md={7.8}>
-          <Box
-            sx={{
-              position: "relative",
-              height: "100%",
-              "&::before": {
-                content: '""',
-                position: "absolute",
-                borderRadius: "23px",
-                inset: "0",
-                background: theme.palette.background.default,
-              },
-            }}
-          >
-            <Box
-              padding={{ xs: "20px 8px", sm: "40px" }}
-              sx={{
-                backgroundColor:
-                  getCurrentModuleType() === ModuleTypes?.FOOD
-                    ? alpha(theme.palette.moduleTheme.food, 0.051)
-                    : alpha(theme.palette.primary.main, 0.051),
-                borderRadius: "23px",
-                position: "relative",
+            <AppLinks
+              landingPageData={{
+                app_store_link:
+                  landingPageData?.user_app_download_section
+                    ?.download_user_app_links?.apple_store_url,
+                play_store_link:
+                  landingPageData?.user_app_download_section
+                    ?.download_user_app_links?.playstore_url,
+                app_status:
+                  landingPageData?.user_app_download_section
+                    ?.download_user_app_links?.apple_store_url_status,
+                play_status:
+                  landingPageData?.user_app_download_section
+                    ?.download_user_app_links?.playstore_url_status,
               }}
+            />
+          </Stack>
+        </Grid>
+
+        {/* Column 2: Links */}
+        <Grid item xs={6} sm={3} md={2.5}>
+          <Stack spacing={2}>
+            <Typography
+              variant="subtitle2"
+              fontWeight={700}
+              sx={{ color: "#fff", textTransform: "uppercase", letterSpacing: "0.08em", fontSize: "11px" }}
             >
-              <Grid container spacing={1}>
-                <Grid item xs={12} sm={6} md={3} align={isSmall && "center"}>
-                  <CustomStackFullWidth
-                    flexDirection="row"
-                    justifyContent="space-between"
-                    gap="10px"
+              {t("Zarpya")}
+            </Typography>
+            <RouteLinks token={undefined} configData={configData} />
+          </Stack>
+        </Grid>
+
+        {/* Column 3: Legal links */}
+        <Grid item xs={6} sm={3} md={2}>
+          <Stack spacing={2}>
+            <Typography
+              variant="subtitle2"
+              fontWeight={700}
+              sx={{ color: "#fff", textTransform: "uppercase", letterSpacing: "0.08em", fontSize: "11px" }}
+            >
+              {t("Legal")}
+            </Typography>
+            <FooterBottomItems
+              handleClickToRoute={handleClickToRoute}
+              configData={configData}
+              vertical
+            />
+          </Stack>
+        </Grid>
+
+        {/* Column 4: Contact */}
+        <Grid item xs={12} sm={6} md={3.5}>
+          <Stack spacing={2}>
+            <Typography
+              variant="subtitle2"
+              fontWeight={700}
+              sx={{ color: "#fff", textTransform: "uppercase", letterSpacing: "0.08em", fontSize: "11px" }}
+            >
+              {t("Contacto")}
+            </Typography>
+            <Stack spacing={1.5}>
+              {contactItems.map((item, i) =>
+                item.label ? (
+                  <Stack
+                    key={i}
+                    direction="row"
+                    spacing={1}
+                    alignItems="flex-start"
+                    sx={{
+                      cursor: item.href || item.onClick ? "pointer" : "default",
+                      "&:hover span": { color: "#2FB9CB" },
+                    }}
+                    onClick={item.onClick}
+                    component={item.href ? "a" : "div"}
+                    href={item.href || undefined}
+                    target={item.href?.startsWith("mailto") || item.href?.startsWith("tel") ? undefined : undefined}
                   >
-                    <RouteLinks token={token} configData={configData} />
-                    {isSmall && (
-                      <FooterBottomItems
-                        handleClickToRoute={handleClickToRoute}
-                        configData={configData}
-                      />
-                    )}
-                  </CustomStackFullWidth>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  md={3}
-                  sx={{
-                    display: { xs: "flex", sm: "none", md: "flex" },
-                    alignItems: "flex-start",
-                    justifyContent: "center",
-                  }}
-                >
-                  <SomeInfo
-                    image={ractangle}
-                    alt="rantangle"
-                    title="Send us mails"
-                    info={configData?.email}
-                    t={t}
-                    href={`mailto:${configData?.email}`}
-                  />
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  md={3}
-                  sx={{
-                    display: { xs: "flex", sm: "none", md: "flex" },
-                    alignItems: "flex-start",
-                    justifyContent: "center",
-                  }}
-                >
-                  <SomeInfo
-                    image={phone}
-                    alt="Phone"
-                    title="Contact us"
-                    info={configData?.phone}
-                    t={t}
-                    href={`tel:${configData?.phone}`}
-                  />
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  md={3}
-                  sx={{
-                    display: { xs: "flex", sm: "none", md: "flex" },
-                    alignItems: "flex-start",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Box onClick={handleOpenCloseMap}>
-                    <SomeInfo
-                      image={magnifying}
-                      alt="magnifying"
-                      title="Find us here"
-                      info={configData?.address}
-                      t={t}
-                      href={false}
-                    />
-                  </Box>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
+                    {item.icon}
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      sx={{
+                        color: "rgba(255,255,255,0.65)",
+                        lineHeight: 1.5,
+                        transition: "color 0.2s ease",
+                      }}
+                    >
+                      {item.label}
+                    </Typography>
+                  </Stack>
+                ) : null
+              )}
+            </Stack>
+          </Stack>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sx={{ display: { xs: "none", sm: "inherit", md: "none" } }}
-        >
-          <Box
-            sx={{
-              width: "100%",
-              backgroundColor:
-                getCurrentModuleType() === ModuleTypes?.FOOD
-                  ? alpha(theme.palette.moduleTheme.food, 0.05)
-                  : alpha(theme.palette.primary.main, 0.05),
-              borderRadius: "23px",
-              padding: "30px",
-            }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <SomeInfo
-                  image={ractangle}
-                  alt="rantangle"
-                  title="Send us mails"
-                  info={configData?.email}
-                  t={t}
-                  href={`mailto:${configData?.email}`}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <SomeInfo
-                  image={phone}
-                  alt="Phone"
-                  title="Contact us"
-                  info={configData?.phone}
-                  t={t}
-                  href={`tel:${configData?.phone}`}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <Box onClick={handleOpenCloseMap}>
-                  <SomeInfo
-                    image={magnifying}
-                    alt="magnifying"
-                    title="Find us here"
-                    info={configData?.address}
-                    href={false}
-                    t={t}
-                  />
-                </Box>
-              </Grid>
-            </Grid>
-          </Box>
-        </Grid>
+
       </Grid>
+
       {open && (
         <LocationViewOnMap
           open={open}
@@ -253,7 +196,5 @@ const FooterMiddle = (props) => {
     </CustomStackFullWidth>
   );
 };
-
-FooterMiddle.propTypes = {};
 
 export default FooterMiddle;

@@ -1,4 +1,6 @@
 import React from "react";
+import { handleStoreRedirect } from "helper-functions/handleStoreRedirect";
+
 import {
   CustomStackFullWidth,
   StoreImageBox,
@@ -39,18 +41,7 @@ const StoreWishCard = ({ data, setSideDrawerOpen }) => {
     });
   };
   const handleCLick = (e) => {
-    router.push(
-      {
-        pathname: "/store/[id]",
-        query: {
-          id: `${storeIdOrSlug}`,
-          module_id: `${moduleId}`,
-          store_zone_id: `${data?.zone_id}`,
-        },
-      },
-
-    );
-
+    handleStoreRedirect(data, router, moduleId);
     setSideDrawerOpen(false);
   };
   return (

@@ -13,6 +13,8 @@ import { styled } from "@mui/system";
 import { useAddStoreToWishlist } from "api-manage/hooks/react-query/wish-list/useAddStoreToWishLists";
 import { useWishListStoreDelete } from "api-manage/hooks/react-query/wish-list/useWishListStoreDelete";
 import { getAmountWithSign } from "helper-functions/CardHelpers";
+import { getStoreRedirectURL } from "helper-functions/handleStoreRedirect";
+
 import { getModuleId } from "helper-functions/getModuleId";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -249,13 +251,7 @@ const StoreDetails = ({ storeDetails, storeImageBaseUrl }) => {
 				<Grid item xs={12} container spacing={2}>
 					<Grid item xs={12}>
 						<Link
-							href={{
-								pathname: "/store/[id]",
-								query: {
-									id: `${storeDetails?.id}`,
-									module_id: `${getModuleId()}`,
-								},
-							}}
+							href={getStoreRedirectURL(storeDetails)}
 						>
 							<CustomButtonPrimary fullwidth="true">
 								<Typography>{t("Visit Store")}</Typography>

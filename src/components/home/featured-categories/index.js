@@ -19,6 +19,7 @@ import ShopCategoryCard from "../../cards/ShopCategoryCard";
 import { HomeComponentsWrapper } from "../HomePageComponents";
 import FeaturedItemCard from "./card";
 import { moduleWiseNext, moduleWisePrev } from "./sliderSettings";
+import SectionHeader from "components/home/section-header";
 
 export const ButtonLeft = styled(CustomButtonPrimary)(
   ({ theme, language_direction }) => ({
@@ -503,6 +504,7 @@ const FeaturedCategories = () => {
 
   return (
     <CustomBoxFullWidth sx={{ mt: "20px" }}>
+      <SectionHeader title="Explora por categoría" />
       {isLoading ? (
         <HomeComponentsWrapper>
           <SliderCustom

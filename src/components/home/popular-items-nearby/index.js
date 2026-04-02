@@ -22,6 +22,7 @@ import CampaignSimmerTimmer from "../../Shimmer/CampaignSimmerTimmer";
 import ProductCardSimmerHorizontal from "../../Shimmer/ProductCardSimmerHorizontal";
 import H2 from "../../typographies/H2";
 import Subtitle1 from "../../typographies/Subtitle1";
+import SectionHeader from "components/home/section-header";
 import { NextFood, PrevFood } from "../best-reviewed-items/SliderSettings";
 import { HomeComponentsWrapper } from "../HomePageComponents";
 import ItemsCampaign from "./items-campaign-slide";
@@ -41,11 +42,7 @@ const PopularItemsNearby = ({ title, subTitle }) => {
     isLoading: flashSalesIsLoading,
   } = useGetFlashSales({ limit, offset });
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   if (popularItemsNearby.products.length === 0) {
-  //     refetch();
-  //   }
-  // }, [popularItemsNearby]);
+
 
   useEffect(() => {
     flashSalesRefetch();
@@ -169,16 +166,7 @@ const PopularItemsNearby = ({ title, subTitle }) => {
             mt={{ xs: "10x", md: "16px" }}
             spacing={1}
           >
-            {isLoading ? (
-              <Skeleton varient="text" width="110px" />
-            ) : (
-              <H2 text={title} component="h2" />
-            )}
-            {isLoading ? (
-              <Skeleton varient="text" width="310px" />
-            ) : (
-              <Subtitle1 text={t(subTitle)} component="p" />
-            )}
+            <SectionHeader title={title} subtitle={subTitle} />
             <CustomBoxFullWidth>
               <Grid container spacing={2} sx={{ marginTop: "1px" }}>
                 {isLoading ? (

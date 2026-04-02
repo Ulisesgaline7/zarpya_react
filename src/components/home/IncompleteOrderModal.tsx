@@ -222,13 +222,13 @@ const IncompleteOrderModal: React.FC<IncompleteOrderModalProps> = ({
           onClick={handleSwitchToCOD}
           disabled={!failPaymentOrderData.order_id || orderLoading}
           sx={{
-            bgcolor: (theme) => alpha(theme.palette.neutral[200], 0.4),
-            color: (theme) => theme.palette.neutral[800],
+            backgroundColor: (theme) => alpha(theme.palette.neutral[600], 0.4),
+            color: (theme) => theme.palette.neutral[1000],
             borderColor: "transparent",
             // px: "30px",
             // borderRadius: "5px",
             "&:hover": {
-              bgcolor: (theme) => alpha(theme.palette.neutral[200], 1),
+              backgroundColor: (theme) => alpha(theme.palette.neutral[200], .8),
               color: (theme) => theme.palette.neutral[900],
               borderColor: "transparent",
             },

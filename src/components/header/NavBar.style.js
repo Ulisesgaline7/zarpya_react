@@ -10,23 +10,32 @@ import {
   styled,
   Switch,
 } from "@mui/material";
+import bgImg from "../../../public/bgimge.jpg";
+
 import React from "react";
 
 export const AppBarStyle = styled(AppBar)(({ theme, scrolling, isSmall }) => ({
-  top: !scrolling ? "0" : isSmall ? "0px" : "-32px",
-  background:
-    theme.palette.mode === "dark"
-      ? `rgba(6,20,16,${scrolling ? "0.97" : "0.85"}) !important`
-      : `rgba(255,255,255,${scrolling ? "0.97" : "0.88"}) !important`,
-  backdropFilter: "blur(20px)",
-  WebkitBackdropFilter: "blur(20px)",
-  borderBottom: scrolling
-    ? `1px solid ${alpha(theme.palette.primary.main, 0.15)}`
-    : "1px solid transparent",
-  boxShadow: scrolling
-    ? `0 4px 28px ${alpha(theme.palette.common.black, 0.1)}`
-    : "none",
-  transition: "all 0.35s ease",
+  top: !scrolling ? "0" : isSmall ? "0px" : "-30px",
+  background: `${theme.palette.mode === "light" && "#fff !important"}`,
+  transition: "all 0.4s ease",
+  // WebkitAnimation: !isSmall && scrolling ? "fadeInUp 0.4s" : "fadeInDown 0.4s",
+  // animation: !isSmall && scrolling ? "fadeInUp 0.4s" : "fadeInDown 0.4s",
+  // "@keyframes fadeInUp": {
+  //   "0%": {
+  //     transform: "translateY(30px)",
+  //   },
+  //   "100%": {
+  //     transform: "translateY(0)",
+  //   },
+  // },
+  // "@keyframes fadeInDown": {
+  //   "0%": {
+  //     transform: "translateY(-30px)",
+  //   },
+  //   "100%": {
+  //     transform: "translateY(0)",
+  //   },
+  // },
 }));
 
 export const CustomStackForLoaction = styled(Stack)(({ theme }) => ({
@@ -34,21 +43,10 @@ export const CustomStackForLoaction = styled(Stack)(({ theme }) => ({
   cursor: "pointer",
   alignItems: "center",
 }));
-
 export const TopBarButton = styled(Button)(({ theme, formmobilemenu }) => ({
-  padding: formmobilemenu === "true" ? "7px 5px" : "7px 16px",
+  padding: formmobilemenu === "true" ? "7px 5px" : "7px 12px",
   color: theme.palette.neutral[100],
-  borderRadius: "12px",
-  fontWeight: 700,
-  fontSize: "14px",
-  boxShadow: `0 4px 16px ${alpha(theme.palette.primary.main, 0.4)}`,
-  transition: "all 0.2s ease",
-  "&:hover": {
-    transform: "translateY(-1px)",
-    boxShadow: `0 6px 20px ${alpha(theme.palette.primary.main, 0.55)}`,
-  },
 }));
-
 export const CustomSwitch = styled(Switch)(({ theme, noimage }) => ({
   width: 40,
   height: 20,
@@ -65,8 +63,8 @@ export const CustomSwitch = styled(Switch)(({ theme, noimage }) => ({
           noimage === "true"
             ? null
             : `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-                theme.palette.primary.main
-              )}" d="M9.305 1.667V3.75h1.389V1.667h-1.39zm-4.707 1.95l-.982.982L5.09 6.072l.982-.982-1.473-1.473zm10.802 0L13.927 5.09l.982.982 1.473-1.473-.982-.982zM10 5.139a4.872 4.872 0 00-4.862 4.86A4.872 4.872 0 0010 14.862 4.872 4.872 0 0014.86 10 4.872 4.872 0 0010 5.139zm0 1.389A3.462 3.462 0 0113.471 10a3.462 3.462 0 01-3.473 3.472A3.462 3.462 0 016.527 10 3.462 3.462 0 0110 6.528zM1.665 9.305v1.39h2.083v-1.39H1.666zm14.583 0v1.39h2.084v-1.39h-2.084zM5.09 13.928L3.616 15.4l.982.982 1.473-1.473-.982-.982zm9.82 0l-.982.982 1.473 1.473.982-.982-1.473-1.473zM9.305 16.25v2.083h1.389V16.25h-1.39z"/></svg>')`,
+              theme.palette.primary.main
+            )}" d="M9.305 1.667V3.75h1.389V1.667h-1.39zm-4.707 1.95l-.982.982L5.09 6.072l.982-.982-1.473-1.473zm10.802 0L13.927 5.09l.982.982 1.473-1.473-.982-.982zM10 5.139a4.872 4.872 0 00-4.862 4.86A4.872 4.872 0 0010 14.862 4.872 4.872 0 0014.86 10 4.872 4.872 0 0010 5.139zm0 1.389A3.462 3.462 0 0113.471 10a3.462 3.462 0 01-3.473 3.472A3.462 3.462 0 016.527 10 3.462 3.462 0 0110 6.528zM1.665 9.305v1.39h2.083v-1.39H1.666zm14.583 0v1.39h2.084v-1.39h-2.084zM5.09 13.928L3.616 15.4l.982.982 1.473-1.473-.982-.982zm9.82 0l-.982.982 1.473 1.473.982-.982-1.473-1.473zM9.305 16.25v2.083h1.389V16.25h-1.39z"/></svg>')`,
       },
       "& + .MuiSwitch-track": {
         backgroundColor:
@@ -76,7 +74,9 @@ export const CustomSwitch = styled(Switch)(({ theme, noimage }) => ({
         opacity: 1,
         border: 0,
       },
-      "&.Mui-disabled + .MuiSwitch-track": { opacity: 0.5 },
+      "&.Mui-disabled + .MuiSwitch-track": {
+        opacity: 0.5,
+      },
     },
     "&.Mui-focusVisible .MuiSwitch-thumb": {
       color: theme.palette.primary.light,
@@ -105,41 +105,48 @@ export const CustomSwitch = styled(Switch)(({ theme, noimage }) => ({
       top: 0,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
-      backgroundImage: noimage
-        ? null
-        : `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-            "#fff"
-          )}" d="M4.2 2.5l-.7 1.8-1.8.7 1.8.7.7 1.8.6-1.8L6.7 5l-1.9-.7-.6-1.8zm15 8.3a6.7 6.7 0 11-6.6-6.6 5.8 5.8 0 006.6 6.6z"/></svg>')`,
+      backgroundImage: noimage ? null : `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
+        "#fff"
+      )}" d="M4.2 2.5l-.7 1.8-1.8.7 1.8.7.7 1.8.6-1.8L6.7 5l-1.9-.7-.6-1.8zm15 8.3a6.7 6.7 0 11-6.6-6.6 5.8 5.8 0 006.6 6.6z"/></svg>')`,
     },
   },
   "& .MuiSwitch-track": {
     borderRadius: 26 / 2,
     backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
     opacity: 1,
-    transition: theme.transitions.create(["background-color"], { duration: 500 }),
+    transition: theme.transitions.create(["background-color"], {
+      duration: 500,
+    }),
   },
 }));
-
 export const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
-    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-    transformOrigin={{ vertical: "top", horizontal: "right" }}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "right",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
     {...props}
   />
 ))(({ theme }) => ({
   "& .MuiPaper-root": {
-    borderRadius: 16,
-    marginTop: theme.spacing(1.5),
+    borderRadius: 6,
+    marginTop: theme.spacing(1),
     minWidth: 180,
     color:
-      theme.palette.mode === "light" ? "rgb(55, 65, 81)" : theme.palette.grey[300],
-    border: `1px solid ${alpha(theme.palette.primary.main, 0.15)}`,
-    boxShadow: `0 12px 40px ${alpha(theme.palette.common.black, 0.14)}`,
-    backdropFilter: "blur(12px)",
-    "& .MuiMenu-list": { padding: "6px" },
+      theme.palette.mode === "light"
+        ? "rgb(55, 65, 81)"
+        : theme.palette.grey[300],
+    boxShadow:
+      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+    "& .MuiMenu-list": {
+      padding: "4px 0",
+    },
     "& .MuiMenuItem-root": {
-      borderRadius: "10px",
       "& .MuiSvgIcon-root": {
         fontSize: 18,
         color: theme.palette.text.secondary,
@@ -154,66 +161,61 @@ export const StyledMenu = styled((props) => (
     },
   },
 }));
-
-export const NavLinkStyle = styled(Stack)(({ theme, language_direction }) => ({
-  color: theme.palette.mode === "dark" ? "rgba(232,245,238,0.7)" : theme.palette.text.secondary,
+export const NavLinkStyle = styled(Stack)(({ theme }) => ({
+  color: theme.palette.mode === "dark" ? "rgba(255,255,255,0.85)" : theme.palette.text.primary,
   fontSize: "15px",
   fontWeight: 500,
+  padding: "6px 12px",
+  borderRadius: "8px",
+  transition: "all 0.18s ease",
   cursor: "pointer",
-  transition: "color 0.2s ease",
   "&:hover": {
     color: theme.palette.primary.main,
+    backgroundColor: theme.palette.mode === "dark"
+      ? "rgba(47,185,203,0.1)"
+      : "rgba(47,185,203,0.08)",
   },
 }));
-
 export const SignInButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.neutral[100],
+  color: "#fff",
   backgroundColor: theme.palette.primary.main,
-  borderRadius: "12px",
+  borderRadius: "24px",
+  padding: "7px 22px",
   fontWeight: 700,
   fontSize: "14px",
-  padding: "9px 22px",
-  boxShadow: `0 4px 16px ${alpha(theme.palette.primary.main, 0.4)}`,
-  transition: "all 0.2s ease",
+  textTransform: "none",
+  boxShadow: "none",
   "&:hover": {
-    backgroundColor: theme.palette.primary.dark,
-    boxShadow: `0 6px 22px ${alpha(theme.palette.primary.main, 0.55)}`,
-    transform: "translateY(-1px)",
+    backgroundColor: theme.palette.primary.dark || "#25a3b3",
+    boxShadow: "0 4px 14px rgba(47,185,203,0.35)",
   },
 }));
-
 export const NavMenuLink = styled(MenuLink)(({ theme }) => ({
   color: theme.palette.neutral[1000],
   display: "flex",
   cursor: "pointer",
-  fontSize: "15px",
-  fontWeight: 500,
+  fontSize: "16px",
   gap: "5px",
   textDecoration: "none",
-  transition: "color 0.2s ease",
   "&:hover": {
     color: theme.palette.primary.main,
     textDecoration: "none",
   },
 }));
-
 export const ButtonContainer = styled("div")(({ theme }) => ({
   marginLeft: "15px",
   marginRight: "15px",
 }));
-
-export const CustomDrawer = styled(Drawer)(({ theme }) => ({
+export const CustomDrawer = styled(Drawer)(({ theme, router }) => ({
   "& .MuiDrawer-paper": {
     top: "56px",
     maxWidth: "320px",
     width: "96vw",
-    height: "calc(100dvh - 56px)",
-    transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+    height: "calc(100dvh-56px)",
+    transition: "transform 0.3s ease-in-out",
     zIndex: "1200",
-    boxShadow: `-8px 0 40px ${alpha(theme.palette.common.black, 0.14)}`,
   },
 }));
-
 export const CustomBottomNavigationAction = styled(BottomNavigationAction)(
   ({ theme }) => ({
     color: theme.palette.neutral[1000],
@@ -221,12 +223,21 @@ export const CustomBottomNavigationAction = styled(BottomNavigationAction)(
     fontSize: "10px !important",
     padding: "0px 0px",
     "& .MuiBottomNavigationAction-label": {
-      fontSize: "12px !important",
+      fontSize: "12px !important" /* Adjust the font size here */,
     },
-    "&.Mui-selected": { color: theme.palette.primary.main },
+    "&.Mui-selected": {
+      color: theme.palette.primary.main,
+    },
     "& .MuiSvgIcon-root": {
       width: "20px",
       fontSize: "1.2rem !important",
     },
+    // "& .MuiBottomNavigationAction-label": {
+    //   overflow: "hidden",
+    //   textOverflow: "ellipsis",
+    //   display: "-webkit-box",
+    //   WebkitLineClamp: "1",
+    //   WebkitBoxOrient: "vertical",
+    // },
   })
 );

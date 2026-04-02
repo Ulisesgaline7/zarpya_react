@@ -25,11 +25,17 @@ const getModuleWiseData = (theme) => {
 };
 
 const CustomButtonWrapper = styled(Button)(({ theme }) => ({
-  height: "30px",
+  height: "34px",
   minWidth: "0px",
-  width: "30px",
+  width: "34px",
+  borderRadius: "24px",
   border: `1px solid ${getModuleWiseData(theme)}`,
   color: getModuleWiseData(theme),
+  transition: "all 0.18s ease",
+  "&:hover": {
+    backgroundColor: getModuleWiseData(theme),
+    color: "#fff",
+  },
 }));
 
 export const CustomRadioGroup = ({

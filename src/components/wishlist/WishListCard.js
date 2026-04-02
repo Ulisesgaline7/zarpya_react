@@ -1,4 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
+import { handleProductRedirect } from "helper-functions/handleProductRedirect";
+
 import { CustomStackFullWidth } from "styled-components/CustomStyles.style";
 import CustomImageContainer from "../CustomImageContainer";
 import { Stack } from "@mui/system";
@@ -154,17 +156,7 @@ const WishListCard = ({ item }) => {
   const addToCart = (e) => {
     if (item?.module_type === "ecommerce") {
       if (item?.variations.length > 0) {
-        router.push(
-          {
-            pathname: "/product/[id]",
-            query: {
-              id: `${item?.slug ? item?.slug : item?.id}`,
-              module_id: `${getModuleId()}`,
-            },
-          },
-          undefined,
-          { shallow: true }
-        );
+        handleProductRedirect(item, router);
       } else {
         e.stopPropagation();
         addToCartHandler();
@@ -180,17 +172,7 @@ const WishListCard = ({ item }) => {
   };
   const handleClick = () => {
     if (item?.module_type === "ecommerce") {
-      router.push(
-        {
-          pathname: "/product/[id]",
-          query: {
-            id: `${item?.slug ? item?.slug : item?.id}`,
-            module_id: `${getModuleId()}`,
-          },
-        },
-        undefined,
-        { shallow: true }
-      );
+      handleProductRedirect(item, router);
     } else {
       setOpenItemModal(true);
     }

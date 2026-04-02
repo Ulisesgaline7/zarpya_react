@@ -1,71 +1,69 @@
-// Colors - Deliveroo Theme
+// Colors
 
 const neutral = {
 	90: "#FFFFFF1A",
 	100: "#FFFFFF",
 	200: "#E5E7EB",
-	300: "#F5F6F6",
+	300: "#F6F7FB",
 	400: "#9CA3AF",
 	500: "#6B7280",
 	600: "#4B5563",
 	700: "#374151",
-	800: "#2E3333",
-	900: "#1A1F1F",
-	1000: "#2E3333",
+	800: "#1F2937",
+	900: "#111827",
+	1000: "#212E28",
 	1100: "#D6D6D6",
 };
 
 const background = {
-	default: "#F5F6F6",
+	default: "#F9FAFC",
 	paper: "#FFFFFF",
-	custom: "#F0F2F2",
+	custom: "#f1f2f5",
 	custom2: "#FFFFFF",
-	custom3: "#F5F6F6",
+	custom3: "#F6F7FB",
 	custom4: "#ffffff",
-	footer1: "#2E33331A",
-	footer2: "#2E33330D",
-	custom5: "#EFF1F1",
-	custom6: "#FAFAFA",
-	custom7: "#F5F5F5",
+	footer1: "#9f9f9f1a",
+	footer2: "#9f9f9f0d",
+	custom5: "#F4F6F8",
+	custom6: "#FCFCFD",
+	custom7: "#F6F6F6",
 };
 
-const divider = "#E0E4E4";
+const divider = "#E6E8F0";
 
 const primary = {
-	main: "#00CCBC",
-	deep: "#007A73",
-	light: "#E6FAF9",
-	dark: "#005F5A",
-	semiLight: "#DFFAF8",
+	main: "#2FB9CB",
+	deep: "#1A8E9D",
+	light: "#E6F8FA",
+	dark: "#1E98A8",
+	semiLight: "#D4F4F8",
 	contrastText: "#FFFFFF",
-	customType1: "#00E5D3",
-	customType2: "#00CCBC",
-	customType3: "#00B8AA",
+	customType1: "#47C8D8",
+	customType2: "#2FB9CB",
+	customType3: "#0DABB8",
 	overLay: "#000000",
-	lite: "rgba(0, 204, 188, 0.1)",
-	icon: "#00CCBC",
+	lite: "rgba(47, 185, 203, 0.1)",
+	icon: "#2FB9CB",
 };
-
 const moduleTheme = {
-	pharmacy: "#00CCBC",
-	ecommerce: "#00CCBC",
-	food: "#00CCBC",
-	parcel: "#00CCBC",
+	pharmacy: "#2FB9CB",
+	ecommerce: "#5859A3",
+	food: "#4AB05E",
+	parcel: "#2FB9CB",
 };
-
-const horizontalCardBG = "#E6FAF9";
+const horizontalCardBG = "#D4F4F8";
 
 const secondary = {
-	main: "#00B8AA",
-	light: "#33C9BC",
-	dark: "#007A73",
+	main: "#5859A3",
+	light: "#7879B8",
+	dark: "#3E3F7A",
 	contrastText: "#FFFFFF",
 };
 
 const success = {
-	main: "#00CCBC",
-	light: "#33D9CB",
-	dark: "#007A73",
+	main: "#4AB05E",
+	light: "#6BC27B",
+	dark: "#337E42",
 	contrastText: "#FFFFFF",
 };
 
@@ -75,7 +73,7 @@ const info = {
 	dark: "#0B79D0",
 	lite: "#DBF5FF",
 	contrastText: "#FFFFFF",
-	contrastText1: "#F5F6F6",
+	contrastText1: "#F5F6F8",
 	blue: "#0D6EFD",
 	custom1: "#31C0F5",
 };
@@ -91,55 +89,52 @@ const warning = {
 };
 
 const error = {
-	main: "#E8203A",
-	light: "#EE4D62",
-	dark: "#B01629",
+	main: "#D14343",
+	light: "#DA6868",
+	dark: "#922E2E",
 	contrastText: "#FFFFFF",
-	deepLight: "#FF5C72",
+	deepLight: "#FF725E",
 };
 
 const text = {
-	primary: "#2E3333",
-	secondary: "#717878",
-	disabled: "rgba(46, 51, 51, 0.48)",
+	primary: "#15263E",
+	secondary: "#93A2AE",
+	disabled: "rgba(55, 65, 81, 0.48)",
 	custom: "#3F3F3F",
 	customText1: "#4B5563",
 };
 
 const footer = {
-	inputButton: "#00CCBC",
-	inputButtonHover: "#007A73",
-	bottom: "rgba(0, 122, 115, 0.3)",
-	foodBottom: "#2E3333",
-	appDownloadButtonBg: "#2E3333",
-	appDownloadButtonBgGray: "#3D4444",
-	appDownloadButtonBgHover: "#4f5555",
-	foodFooterBg: "#2E3333",
+	inputButton: "#B3ECEF",
+	inputButtonHover: "#7DD4DB",
+	bottom: "rgba(21, 38, 62, 0.3)",
+	foodBottom: "#686B78",
+	appDownloadButtonBg: "#1A1A1A",
+	appDownloadButtonBgGray: "#15263E",
+	appDownloadButtonBgHover: "#4f4f4f",
+	foodFooterBg: "#414141",
 };
-
 const customColor = {
 	textGray: "#9c9c9c",
-	textGrayDeep: "#717878",
-	buyButton: "#00CCBC",
-	parcelWallet: "#7C3AED",
+	textGrayDeep: "#787676",
+	buyButton: "#F9E091",
+	parcelWallet: "#8B3FFD",
 };
-
 const whiteContainer = {
 	main: "#ffffff",
 };
-
 const pink = {
 	main: "#FF6D76",
 };
-
-const foodCardColor = "#F0FAF9";
-const paperBoxShadow = "#DDE4E4";
+const foodCardColor = "#FFF6EF";
+const paperBoxShadow = "#E5EAF1";
 const roundStackOne = "rgba(255, 255, 255, 0.04)";
 const roundStackTwo = "rgba(255, 255, 255, 0.06)";
 const toolTipColor = neutral[1000];
 
 export const lightThemeOptions = {
 	components: {
+		 MuiUseMediaQuery: { defaultProps: { noSsr: true } }, // ⚡ Fix hydration
 		MuiAvatar: {
 			styleOverrides: {
 				root: {
@@ -182,7 +177,7 @@ export const lightThemeOptions = {
 				},
 				input: {
 					"&:-webkit-autofill": {
-						"-webkit-box-shadow": "0 0 0 100px #eef5f5 inset",
+						"-webkit-box-shadow": "0 0 0 100px #f0f5f5 inset",
 						"-webkit-text-fill-color": "#000",
 					},
 				},
@@ -238,11 +233,11 @@ export const lightThemeOptions = {
 	palette: {
 		action: {
 			active: neutral[500],
-			focus: "rgba(46, 51, 51, 0.12)",
-			hover: "rgba(46, 51, 51, 0.04)",
-			selected: "rgba(46, 51, 51, 0.08)",
-			disabledBackground: "rgba(46, 51, 51, 0.12)",
-			disabled: "rgba(46, 51, 51, 0.26)",
+			focus: "rgba(55, 65, 81, 0.12)",
+			hover: "rgba(55, 65, 81, 0.04)",
+			selected: "rgba(55, 65, 81, 0.08)",
+			disabledBackground: "rgba(55, 65, 81, 0.12)",
+			disabled: "rgba(55, 65, 81, 0.26)",
 		},
 		horizontalCardBG,
 		background,
@@ -269,29 +264,29 @@ export const lightThemeOptions = {
 	},
 	shadows: [
 		"none",
-		"0px 1px 1px rgba(46, 51, 51, 0.06), 0px 1px 2px rgba(46, 51, 51, 0.1)",
-		"0px 1px 2px rgba(46, 51, 51, 0.12)",
-		"0px 1px 4px rgba(46, 51, 51, 0.12)",
-		"0px 1px 5px rgba(46, 51, 51, 0.12)",
-		"0px 1px 6px rgba(46, 51, 51, 0.12)",
-		"0px 2px 6px rgba(46, 51, 51, 0.12)",
-		"0px 3px 6px rgba(46, 51, 51, 0.12)",
-		"0px 2px 4px rgba(46, 51, 51, 0.06), 0px 4px 6px rgba(46, 51, 51, 0.12)",
-		"0px 5px 12px rgba(46, 51, 51, 0.12)",
-		"0px 5px 14px rgba(46, 51, 51, 0.12)",
-		"0px 5px 15px rgba(46, 51, 51, 0.12)",
-		"0px 6px 15px rgba(46, 51, 51, 0.12)",
-		"0px 7px 15px rgba(46, 51, 51, 0.12)",
-		"0px 8px 15px rgba(46, 51, 51, 0.12)",
-		"0px 9px 15px rgba(46, 51, 51, 0.12)",
-		"0px 10px 15px rgba(46, 51, 51, 0.12)",
-		"0px 12px 22px -8px rgba(46, 51, 51, 0.25)",
-		"0px 13px 22px -8px rgba(46, 51, 51, 0.25)",
-		"0px 14px 24px -8px rgba(46, 51, 51, 0.25)",
-		"0px 10px 10px rgba(46, 51, 51, 0.04), 0px 20px 25px rgba(46, 51, 51, 0.1)",
-		"0px 25px 50px rgba(46, 51, 51, 0.25)",
-		"0px 25px 50px rgba(46, 51, 51, 0.25)",
-		"0px 25px 50px rgba(46, 51, 51, 0.25)",
-		"0px 25px 50px rgba(46, 51, 51, 0.25)",
+		"0px 1px 1px rgba(100, 116, 139, 0.06), 0px 1px 2px rgba(100, 116, 139, 0.1)",
+		"0px 1px 2px rgba(100, 116, 139, 0.12)",
+		"0px 1px 4px rgba(100, 116, 139, 0.12)",
+		"0px 1px 5px rgba(100, 116, 139, 0.12)",
+		"0px 1px 6px rgba(100, 116, 139, 0.12)",
+		"0px 2px 6px rgba(100, 116, 139, 0.12)",
+		"0px 3px 6px rgba(100, 116, 139, 0.12)",
+		"0px 2px 4px rgba(31, 41, 55, 0.06), 0px 4px 6px rgba(100, 116, 139, 0.12)",
+		"0px 5px 12px rgba(100, 116, 139, 0.12)",
+		"0px 5px 14px rgba(100, 116, 139, 0.12)",
+		"0px 5px 15px rgba(100, 116, 139, 0.12)",
+		"0px 6px 15px rgba(100, 116, 139, 0.12)",
+		"0px 7px 15px rgba(100, 116, 139, 0.12)",
+		"0px 8px 15px rgba(100, 116, 139, 0.12)",
+		"0px 9px 15px rgba(100, 116, 139, 0.12)",
+		"0px 10px 15px rgba(100, 116, 139, 0.12)",
+		"0px 12px 22px -8px rgba(100, 116, 139, 0.25)",
+		"0px 13px 22px -8px rgba(100, 116, 139, 0.25)",
+		"0px 14px 24px -8px rgba(100, 116, 139, 0.25)",
+		"0px 10px 10px rgba(31, 41, 55, 0.04), 0px 20px 25px rgba(31, 41, 55, 0.1)",
+		"0px 25px 50px rgba(100, 116, 139, 0.25)",
+		"0px 25px 50px rgba(100, 116, 139, 0.25)",
+		"0px 25px 50px rgba(100, 116, 139, 0.25)",
+		"0px 25px 50px rgba(100, 116, 139, 0.25)",
 	],
 };

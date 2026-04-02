@@ -1,8 +1,8 @@
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import { getCurrentModuleType } from "helper-functions/getCurrentModuleType";
 import { ModuleTypes } from "helper-functions/moduleTypes";
-import { CustomStackFullWidth } from "styled-components/CustomStyles.style";
 import ManageSearch from "../header/second-navbar/ManageSearch";
 import TrackParcelFromHomePage from "../parcel/TrackParcelFromHomePage";
 import { useSelector } from "react-redux";
@@ -15,110 +15,125 @@ const SearchWithTitle = (props) => {
   const { zoneid, token, searchQuery, name, query, currentTab } = props;
   const { configData } = useSelector((state) => state.configData);
 
-  const getBannerTexts1 = t("Obtén tu servicio de alquiler de autos con");
-  const getBannerSubTexts = t("a un precio accesible.");
+  const getBannerTexts1 = t("Get your car rental service with");
+  const getBannerSubTexts = t("with affordable price.");
 
   const getBannerTexts = () => {
     switch (getCurrentModuleType()) {
       case ModuleTypes.GROCERY:
         return {
-          title: "Productos frescos que merecen estar en tu mesa",
-          subTitle: "Recibe tus compras en menos de una hora",
+          title: "Lo mejor zarpa directo a tu puerta",
+          subTitle: "Mercado fresco entregado en menos de una hora",
         };
       case ModuleTypes.PHARMACY:
         return {
-          title: "Medicamentos y salud de calidad a tu puerta.",
-          subTitle: "",
+          title: "Tu salud siempre a flote",
+          subTitle: "Medicamentos y cuidado personal en tu puerto",
         };
       case ModuleTypes.ECOMMERCE:
         return {
-          title: "Colección exclusiva para todos",
-          subTitle: "Encuentra los mejores productos de alta calidad aquí",
+          title: "Descubre lo que zarpa para ti",
+          subTitle: "Los mejores productos anclan en tu puerta",
         };
       case ModuleTypes.FOOD:
         return {
-          title: "ENCUENTRA TU FELICIDAD",
-          subTitle: "Por el amor a la buena comida.",
+          title: "¡El sabor zarpa hacia ti!",
+          subTitle: "El mejor restaurante navega hasta tu puerta",
         };
       case ModuleTypes.PARCEL:
         return {
-          title: "Rastrea tus envíos",
-          subTitle: "Ahora puedes rastrear tus paquetes cuando quieras.",
+          title: "Sigue tu envío en alta mar",
+          subTitle: "Rastrea tu paquete en tiempo real, donde zarpe.",
         };
       case ModuleTypes.RENTAL:
         return {
-          title: "Alquila el mejor auto para la mejor experiencia",
+          title: "Zarpa hacia tu próxima aventura",
           subTitle: `${getBannerTexts1} ${configData?.business_name} ${getBannerSubTexts}`,
         };
       default:
-        return {
-          title: "",
-          subTitle: "",
-        };
+        return { title: "", subTitle: "" };
     }
   };
 
+  const isRental = moduleType === "rental";
+  const isParcel = moduleType === "parcel";
+
   return (
-    <CustomStackFullWidth
-      alignItems="center"
-      justifyContent="center"
-      spacing={isSmall ? 1 : 3}
-      p={isSmall ? "25px" : "20px"}
-      mt={ModuleTypes.RENTAL === "rental" ? { xs: 0, sm: 2 } : 0}
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: isSmall ? "14px" : "22px",
+        px: { xs: 2, sm: 4 },
+        py: { xs: 3, md: 4 },
+        textAlign: "center",
+      }}
     >
-      <CustomStackFullWidth
-        alignItems="center"
-        justifyContent="center"
-        spacing={1.5}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          alignItems: "center",
+          maxWidth: "680px",
+        }}
       >
         <Typography
-          variant={isSmall ? "h6" : "h5"}
-          textAlign="center"
-          fontWeight="600"
-          lineHeight="33.18px"
+          variant={isSmall ? "h5" : "h3"}
+          fontWeight={800}
           component="h1"
           sx={{
-            fontSize: {
-              md: ModuleTypes.RENTAL === "rental" && "30px !important",
-            },
-            textTransform:
-              ModuleTypes.RENTAL === "rental" ? "capitalize" : "initial",
+            color: "#fff",
+            lineHeight: 1.2,
+            letterSpacing: "-0.5px",
+            textShadow: "0 2px 12px rgba(0,0,0,0.25)",
           }}
         >
           {t(getBannerTexts().title)}
         </Typography>
         <Typography
-          variant={isSmall ? "subtitle2" : "subtitle1"}
-          textAlign="center"
+          variant={isSmall ? "body2" : "body1"}
           sx={{
-            color: (theme) =>
-              theme.palette.mode === "dark"
-                ? theme.palette.neutral[1000]
-                : theme.palette.neutral[400],
+            color: "rgba(255,255,255,0.82)",
+            maxWidth: "480px",
+            lineHeight: 1.6,
           }}
-          fontWeight="400"
-          lineHeight="18.75px"
-          component="p"
         >
           {t(getBannerTexts().subTitle)}
         </Typography>
-      </CustomStackFullWidth>
+      </Box>
 
-      {moduleType === "parcel" ? (
+      {isParcel ? (
         <TrackParcelFromHomePage />
-      ) : moduleType === "rental" ? null : (
-        <ManageSearch
-          zoneid={zoneid}
-          token={token}
-          maxwidth="false"
-          fullWidth
-          searchQuery={searchQuery}
-          name={name}
-          query={query}
-          currentTab={currentTab}
-        />
+      ) : isRental ? null : (
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: { xs: "100%", sm: "560px", md: "640px" },
+            "& .MuiOutlinedInput-root": {
+              backgroundColor: "#fff",
+              borderRadius: "14px",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.18)",
+              "&:hover fieldset": { borderColor: "transparent" },
+              "&.Mui-focused fieldset": { borderColor: "transparent" },
+            },
+          }}
+        >
+          <ManageSearch
+            zoneid={zoneid}
+            token={token}
+            maxwidth="false"
+            fullWidth
+            searchQuery={searchQuery}
+            name={name}
+            query={query}
+            currentTab={currentTab}
+          />
+        </Box>
       )}
-    </CustomStackFullWidth>
+    </Box>
   );
 };
 

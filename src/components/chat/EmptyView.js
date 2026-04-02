@@ -8,7 +8,6 @@ import { Avatar } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import EmptyBoxSvg from "./EmptyBoxSvg";
 import { useTheme } from "@emotion/react";
-
 const StyledBox = styled(Box)(({ theme }) => ({
 	alignItems: "center",
 	display: "flex",
@@ -18,7 +17,6 @@ const StyledBox = styled(Box)(({ theme }) => ({
 	overflow: "hidden",
 	height: "60vh",
 }));
-
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
 	backgroundColor: theme.palette.primary.main,
 	color: theme.palette.primary.contrastText,
@@ -32,16 +30,20 @@ const EmptyView = (props) => {
 	return (
 		<StyledBox>
 			<EmptyBoxSvg />
+			{/*<StyledAvatar*/}
+			{/*>*/}
+			{/*    <SmsIcon fontSize="small" />*/}
+			{/*</StyledAvatar>*/}
 			<Typography
 				color="textSecondary"
 				sx={{ mt: 2 }}
 				variant="subtitle1"
 			>
-				{t("Actualmente no tienes ningún mensaje seleccionado.")}
+				{t("Currently You don’t have any message selected.")}
 			</Typography>
 			<Typography fontSize="12px" color={theme.palette.neutral[400]}>
 				{t(
-					"Elige uno de tus mensajes existentes o inicia uno nuevo."
+					"Choose one from your existing messages, or start a new one."
 				)}
 			</Typography>
 		</StyledBox>

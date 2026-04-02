@@ -1,165 +1,125 @@
-import {
-  alpha,
-  Skeleton,
-  Stack,
-  styled,
-  Tooltip,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { alpha, Skeleton, Stack, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { getModuleId } from "helper-functions/getModuleId";
 import Link from "next/link";
-import { CustomBoxFullWidth } from "styled-components/CustomStyles.style";
-import { textWithEllipsis } from "styled-components/TextWithEllipsis";
 import NextImage from "components/NextImage";
-import useTextEllipsis from "api-manage/hooks/custom-hooks/useTextEllipsis";
+import { useRouter } from "next/router";
 
-export const Card = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: "100px",
-  width: "100px",
-  borderRadius: "8px",
-  padding: "5px",
-  "&:hover": {
-    boxShadow: "0px 15px 25px rgba(88, 110, 125, 0.1)",
-    border: "0px",
-  },
-  [theme.breakpoints.down("sm")]: {
-    height: "110px",
-    width: "110px",
-  },
-}));
+export const Card = Box; // Keep export for backward compat
 
 const FeaturedItemCard = ({ image, title, id, onlyshimmer }) => {
+  const router = useRouter();
   const [hover, setHover] = useState(false);
-  const { ref: textRef, isEllipsed } = useTextEllipsis(title);
-  const classes = textWithEllipsis();
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isExtraSmallScreen = useMediaQuery(theme.breakpoints.down("xs"));
+  const queryModule = router?.query?.module || router?.query?.module_id;
+  const moduleValue = Array.isArray(queryModule)
+    ? queryModule[0]
+    : queryModule || getModuleId();
+
+  if (onlyshimmer) {
+    return (
+      <Box sx={{ px: "6px" }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          spacing={1.5}
+          sx={{
+            px: 1.5,
+            py: 1,
+            borderRadius: "40px",
+            border: `1.5px solid ${alpha(theme.palette.neutral[400], 0.15)}`,
+            backgroundColor: theme.palette.background.paper,
+            width: "fit-content",
+            minWidth: "110px",
+          }}
+        >
+          <Skeleton variant="circular" width={36} height={36} />
+          <Skeleton variant="text" width={60} height={18} />
+        </Stack>
+      </Box>
+    );
+  }
 
   return (
     <Link
       href={{
-        pathname: "/home",
+        pathname: "/search",
         query: {
           search: "category",
           id: id,
-          module_id: `${getModuleId()}`,
-          name: title && title,
+          name: title,
           data_type: "category",
+          ...(moduleValue ? { module: String(moduleValue) } : {}),
         },
       }}
       passHref
     >
-      <Stack
-        alignItems="center"
-        justifyContent="center"
-        spacing={1}
+      <Box
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         sx={{
-          padding: ".5rem",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "10px",
+          px: "10px",
+          py: "8px",
+          borderRadius: "40px",
           cursor: "pointer",
-          height: { xs: "130px", md: "155px" },
-          width: { xs: "100px", md: "124px" },
-          backgroundColor: (theme) => theme.palette.background.paper,
-          border: (theme) =>
-            `1.5px solid ${alpha(theme.palette.neutral[400], 0.2)}`,
-          borderRadius: "10px",
-          "&:hover": {
-            boxShadow: "0px 10px 20px 0px rgba(88, 110, 125, 0.10)",
-            border: (theme) => `.5px solid ${theme.palette.primary.main}`,
-            img: {
-              transform: "scale(1.04)",
-            },
-          },
-          // ensure flex items can shrink inside
-          "& > div": {
-            minWidth: 0,
-          },
+          border: `1.5px solid ${
+            hover
+              ? theme.palette.primary.main
+              : alpha(theme.palette.neutral[400], 0.2)
+          }`,
+          backgroundColor: hover
+            ? alpha(theme.palette.primary.main, 0.06)
+            : theme.palette.background.paper,
+          transition: "all 0.2s ease",
+          boxShadow: hover
+            ? `0 4px 16px ${alpha(theme.palette.primary.main, 0.18)}`
+            : "0 1px 4px rgba(0,0,0,0.06)",
+          mx: "4px",
+          userSelect: "none",
         }}
       >
-        <Stack
+        {/* Circular image */}
+        <Box
           sx={{
-            position: "relative",
-            height: { xs: "95px", md: "110px" },
-            width: "100%",
-            img: {
-              width: "100%",
-              height: "100%",
-            },
+            width: 40,
+            height: 40,
+            borderRadius: "50%",
+            overflow: "hidden",
+            flexShrink: 0,
+            backgroundColor: alpha(theme.palette.primary.main, 0.1),
+            border: `2px solid ${alpha(theme.palette.primary.main, 0.15)}`,
           }}
         >
-          {onlyshimmer ? (
-            <Skeleton width="100%" height="100%" variant="rectangle" />
-          ) : (
-            <NextImage
-              src={image}
-              alt={title}
-              height={110}
-              width={106}
-              objectFit="cover"
-              bg="#ddd"
-            />
-          )}
-        </Stack>
-
-        <Tooltip
-          title={isEllipsed ? title : ""}
-          placement="bottom"
-          arrow
-          componentsProps={{
-            tooltip: {
-              sx: {
-                bgcolor: (theme) => theme.palette.toolTipColor,
-                "& .MuiTooltip-arrow": {
-                  color: (theme) => theme.palette.toolTipColor,
-                },
-              },
-            },
+          <NextImage
+            src={image}
+            alt={title}
+            height={40}
+            width={40}
+            objectFit="cover"
+            bg={alpha(theme.palette.primary.main, 0.08)}
+          />
+        </Box>
+        {/* Label */}
+        <Typography
+          variant="body2"
+          fontWeight={hover ? 700 : 500}
+          color={hover ? "primary.main" : "text.primary"}
+          sx={{
+            whiteSpace: "nowrap",
+            maxWidth: "90px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            lineHeight: 1.3,
+            transition: "color 0.2s ease, font-weight 0.1s ease",
           }}
         >
-          <CustomBoxFullWidth
-            sx={{
-              px: "10px",
-              width: "100%",
-              // Ensu"100%",
-              // Ensure wrapper in flex can shrink and give a constrained width
-              minWidth: 0,
-            }}
-          >
-            <Typography
-              // put ref on the exact element that holds the text
-              ref={textRef}
-              component="h4"
-              textAlign="center"
-              className={classes.singleLineEllipsis}
-              sx={{
-                // Force the single-line ellipsis CSS here to be sure
-                display: "block",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-                width: "100%",
-              }}
-              maxHeight="20px"
-              color={hover ? "primary.main" : "text.primary"}
-            >
-              {onlyshimmer ? (
-                <Skeleton width="70px" variant="text" sx={{ mx: "auto" }} />
-              ) : (
-                title
-              )}
-            </Typography>
-          </CustomBoxFullWidth>
-        </Tooltip>
-      </Stack>
+          {title}
+        </Typography>
+      </Box>
     </Link>
   );
 };
