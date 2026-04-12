@@ -117,6 +117,7 @@ export const brand_list = "api/v1/brand";
 export const brand_products = "api/v1/brand/items/";
 export const visit_again = "api/v1/customer/visit-again";
 export const paid_ads = "api/v1/advertisement/list";
+export const ad_track_event = "api/v1/advertisement/track-event";
 export const firebase_otp = "api/v1/auth/firebase-verify-token";
 export const firebase_reset_password="api/v1/auth/firebase-reset-password"
 export const automated_message = "api/v1/customer/automated-message";
@@ -150,3 +151,31 @@ export const item_details_api = "/api/v1/items/details";
 export const confirm_return_parcel="api/v1/customer/order/parcel-return"
 export const wallet_payment_api = "/api/v1/customer/order/wallet-payment";
 export const payment_failed_api = "/api/v1/customer/order/payment-failed";
+
+// ── Taxi ─────────────────────────────────────────────────────────
+export const taxi_estimate_api       = "/api/v1/taxi/estimate";
+export const taxi_request_api        = "/api/v1/taxi/request";
+export const taxi_ride_api           = "/api/v1/taxi/ride";          // GET /{id}
+export const taxi_cancel_api         = "/api/v1/taxi/ride";          // POST /{id}/cancel
+export const taxi_driver_login_api   = "/api/v1/taxi/driver/login";
+export const taxi_driver_profile_api = "/api/v1/taxi/driver/profile";
+export const taxi_driver_toggle_api  = "/api/v1/taxi/driver/toggle-available";
+export const taxi_driver_location_api= "/api/v1/taxi/driver/location";
+export const taxi_pending_rides_api  = "/api/v1/taxi/driver/pending-rides";
+export const taxi_accept_ride_api    = "/api/v1/taxi/driver/ride";   // POST /{id}/accept
+export const taxi_ride_status_api    = "/api/v1/taxi/driver/ride";   // POST /{id}/status
+
+// ── Servicios (tipo Fiverr) ───────────────────────────────────────
+export const services_categories_api = "/api/v1/services/categories";
+export const services_providers_api  = "/api/v1/services/providers";
+export const service_provider_api    = "/api/v1/services/providers";  // GET /{id}
+export const service_request_api     = "/api/v1/services/request";
+export const service_accept_quote_api= "/api/v1/services/request";   // POST /{id}/accept-quote
+export const service_complete_api    = "/api/v1/services/request";   // POST /{id}/complete
+export const my_service_requests_api = "/api/v1/services/my-requests";
+
+// ── Suscripciones de cliente ──────────────────────────────────────
+export const customer_subscription_api = "/api/v1/customer/subscription";
+export const subscription_plans_api    = "/api/v1/customer/subscription/plans";
+export const subscribe_plan_api        = "/api/v1/customer/subscription/subscribe";
+export const cancel_subscription_api   = "/api/v1/customer/subscription/cancel";

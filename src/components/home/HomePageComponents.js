@@ -32,6 +32,7 @@ import Parcel from "./module-wise-components/parcel/Index";
 import Pharmacy from "./module-wise-components/pharmacy/Pharmacy";
 
 import TopBanner from "./top-banner";
+import ZarpyaServicesGrid from "./ZarpyaServicesGrid";
 import TaxiSearchPanel from "components/home/module-wise-components/rental/components/global/search/TaxiSearchPanel";
 import { useGetWishList } from "api-manage/hooks/react-query/rental-wishlist/useGetWishlist";
 import Rental from "components/home/module-wise-components/rental/Rental";
@@ -45,6 +46,7 @@ import { GoogleApi } from "api-manage/hooks/react-query/googleApi";
 import { useUpdatePaymentMethod } from "api-manage/hooks/react-query/payment-method/useUpdatePaymentMethod";
 import { useUpdatePaymentByWallet } from "api-manage/hooks/react-query/useUpdatePaymentByWallet";
 import { onErrorResponse } from "api-manage/api-error-response/ErrorResponses";
+
 
 export const HomeComponentsWrapper = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -268,6 +270,17 @@ const HomePageComponents = ({ configData, landingPageData }) => {
               <TaxiSearchPanel position="relative" />
             </Box>
           )}
+          {/* ── Grid de servicios estilo Gojek ── */}
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: "1240px",
+              mx: "auto",
+              px: { xs: 0, md: 2 },
+            }}
+          >
+            <ZarpyaServicesGrid configData={configData} />
+          </Box>
           <Box width="100%">{getModuleWiseComponents()}</Box>
         </CustomStackFullWidth>
 

@@ -270,7 +270,7 @@ export const baseThemeOptions = {
   direction: "ltr",
 
   shape: {
-    borderRadius: 8,
+    borderRadius: 12,  // más redondeado — estilo Rappi
   },
 
   typography: {

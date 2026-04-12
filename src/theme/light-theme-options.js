@@ -1,131 +1,134 @@
-// Colors
+// ── MODO CLARO — estilo Rappi/PedidosYa ──────────────────────────
+// Color primario: Cyan #2FB9CB (siempre)
+// Fondo: blanco puro, cards con sombra suave
+// Tipografía: negrita, legible
 
 const neutral = {
-	90: "#FFFFFF1A",
-	100: "#FFFFFF",
-	200: "#E5E7EB",
-	300: "#F6F7FB",
-	400: "#9CA3AF",
-	500: "#6B7280",
-	600: "#4B5563",
-	700: "#374151",
-	800: "#1F2937",
-	900: "#111827",
-	1000: "#212E28",
-	1100: "#D6D6D6",
+  90: "#FFFFFF1A",
+  100: "#FFFFFF",
+  200: "#E5E7EB",
+  300: "#F6F7FB",
+  400: "#9CA3AF",
+  500: "#6B7280",
+  600: "#4B5563",
+  700: "#374151",
+  800: "#1F2937",
+  900: "#111827",
+  1000: "#1A1A2E",
+  1100: "#D6D6D6",
 };
 
 const background = {
-	default: "#F9FAFC",
-	paper: "#FFFFFF",
-	custom: "#f1f2f5",
-	custom2: "#FFFFFF",
-	custom3: "#F6F7FB",
-	custom4: "#ffffff",
-	footer1: "#9f9f9f1a",
-	footer2: "#9f9f9f0d",
-	custom5: "#F4F6F8",
-	custom6: "#FCFCFD",
-	custom7: "#F6F6F6",
+  default: "#F4F6F9",   // gris muy suave — fondo de página
+  paper: "#FFFFFF",
+  custom: "#F0F2F5",
+  custom2: "#FFFFFF",
+  custom3: "#F6F7FB",
+  custom4: "#FFFFFF",
+  footer1: "#9f9f9f1a",
+  footer2: "#9f9f9f0d",
+  custom5: "#F4F6F8",
+  custom6: "#FFFFFF",
+  custom7: "#F6F6F6",
 };
 
-const divider = "#E6E8F0";
+const divider = "#EAECF0";
 
 const primary = {
-	main: "#2FB9CB",
-	deep: "#1A8E9D",
-	light: "#E6F8FA",
-	dark: "#1E98A8",
-	semiLight: "#D4F4F8",
-	contrastText: "#FFFFFF",
-	customType1: "#47C8D8",
-	customType2: "#2FB9CB",
-	customType3: "#0DABB8",
-	overLay: "#000000",
-	lite: "rgba(47, 185, 203, 0.1)",
-	icon: "#2FB9CB",
+  main: "#2FB9CB",
+  deep: "#1A8E9D",
+  light: "#E6F8FA",
+  dark: "#1E98A8",
+  semiLight: "#D4F4F8",
+  contrastText: "#FFFFFF",
+  customType1: "#47C8D8",
+  customType2: "#2FB9CB",
+  customType3: "#0DABB8",
+  overLay: "#000000",
+  lite: "rgba(47, 185, 203, 0.1)",
+  icon: "#2FB9CB",
 };
+
 const moduleTheme = {
-	pharmacy: "#2FB9CB",
-	ecommerce: "#5859A3",
-	food: "#4AB05E",
-	parcel: "#2FB9CB",
+  pharmacy: "#2FB9CB",
+  ecommerce: "#5859A3",
+  food: "#FF6B35",
+  parcel: "#2FB9CB",
 };
-const horizontalCardBG = "#D4F4F8";
+
+const horizontalCardBG = "#E6F8FA";
 
 const secondary = {
-	main: "#5859A3",
-	light: "#7879B8",
-	dark: "#3E3F7A",
-	contrastText: "#FFFFFF",
+  main: "#5859A3",
+  light: "#7879B8",
+  dark: "#3E3F7A",
+  contrastText: "#FFFFFF",
 };
 
 const success = {
-	main: "#4AB05E",
-	light: "#6BC27B",
-	dark: "#337E42",
-	contrastText: "#FFFFFF",
+  main: "#22C55E",
+  light: "#4ADE80",
+  dark: "#16A34A",
+  contrastText: "#FFFFFF",
 };
 
 const info = {
-	main: "#2196F3",
-	light: "#64B6F7",
-	dark: "#0B79D0",
-	lite: "#DBF5FF",
-	contrastText: "#FFFFFF",
-	contrastText1: "#F5F6F8",
-	blue: "#0D6EFD",
-	custom1: "#31C0F5",
+  main: "#2196F3",
+  light: "#64B6F7",
+  dark: "#0B79D0",
+  lite: "#DBF5FF",
+  contrastText: "#FFFFFF",
+  contrastText1: "#F5F6F8",
+  blue: "#0D6EFD",
+  custom1: "#31C0F5",
 };
 
 const warning = {
-	main: "#FFB020",
-	light: "#FFF8D5",
-	lite: "#FFBD8B",
-	liter: "#FFF8F2",
-	dark: "#FE961C",
-	contrastText: "#FFFFFF",
-	new: "#FFC817",
+  main: "#F59E0B",
+  light: "#FCD34D",
+  lite: "#FEF3C7",
+  liter: "#FFFBEB",
+  dark: "#D97706",
+  contrastText: "#FFFFFF",
+  new: "#FFC817",
 };
 
 const error = {
-	main: "#D14343",
-	light: "#DA6868",
-	dark: "#922E2E",
-	contrastText: "#FFFFFF",
-	deepLight: "#FF725E",
+  main: "#EF4444",
+  light: "#F87171",
+  dark: "#DC2626",
+  contrastText: "#FFFFFF",
+  deepLight: "#FF725E",
 };
 
 const text = {
-	primary: "#15263E",
-	secondary: "#93A2AE",
-	disabled: "rgba(55, 65, 81, 0.48)",
-	custom: "#3F3F3F",
-	customText1: "#4B5563",
+  primary: "#111827",
+  secondary: "#6B7280",
+  disabled: "rgba(55, 65, 81, 0.38)",
+  custom: "#1F2937",
+  customText1: "#374151",
 };
 
 const footer = {
-	inputButton: "#B3ECEF",
-	inputButtonHover: "#7DD4DB",
-	bottom: "rgba(21, 38, 62, 0.3)",
-	foodBottom: "#686B78",
-	appDownloadButtonBg: "#1A1A1A",
-	appDownloadButtonBgGray: "#15263E",
-	appDownloadButtonBgHover: "#4f4f4f",
-	foodFooterBg: "#414141",
+  inputButton: "#B3ECEF",
+  inputButtonHover: "#7DD4DB",
+  bottom: "rgba(21, 38, 62, 0.3)",
+  foodBottom: "#686B78",
+  appDownloadButtonBg: "#1A1A1A",
+  appDownloadButtonBgGray: "#15263E",
+  appDownloadButtonBgHover: "#4f4f4f",
+  foodFooterBg: "#414141",
 };
+
 const customColor = {
-	textGray: "#9c9c9c",
-	textGrayDeep: "#787676",
-	buyButton: "#F9E091",
-	parcelWallet: "#8B3FFD",
+  textGray: "#9c9c9c",
+  textGrayDeep: "#787676",
+  buyButton: "#F9E091",
+  parcelWallet: "#8B3FFD",
 };
-const whiteContainer = {
-	main: "#ffffff",
-};
-const pink = {
-	main: "#FF6D76",
-};
+
+const whiteContainer = { main: "#ffffff" };
+const pink = { main: "#FF6D76" };
 const foodCardColor = "#FFF6EF";
 const paperBoxShadow = "#E5EAF1";
 const roundStackOne = "rgba(255, 255, 255, 0.04)";
@@ -134,7 +137,7 @@ const toolTipColor = neutral[1000];
 
 export const lightThemeOptions = {
 	components: {
-		 MuiUseMediaQuery: { defaultProps: { noSsr: true } }, // ⚡ Fix hydration
+		 MuiUseMediaQuery: { defaultProps: { noSsr: true } },
 		MuiAvatar: {
 			styleOverrides: {
 				root: {
@@ -143,38 +146,69 @@ export const lightThemeOptions = {
 				},
 			},
 		},
+		// Cards más redondeadas estilo Rappi
+		MuiCard: {
+			styleOverrides: {
+				root: {
+					borderRadius: "16px",
+					boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+					border: `1px solid ${divider}`,
+				},
+			},
+		},
+		MuiPaper: {
+			styleOverrides: {
+				root: {
+					backgroundImage: "none",
+					borderRadius: "16px",
+				},
+				rounded: {
+					borderRadius: "16px",
+				},
+			},
+		},
+		// Botones más redondeados
+		MuiButton: {
+			defaultProps: { disableElevation: true },
+			styleOverrides: {
+				root: {
+					textTransform: "none",
+					borderRadius: "12px",
+					fontWeight: 700,
+				},
+				contained: {
+					boxShadow: "none",
+					"&:hover": { boxShadow: "0 4px 14px rgba(47,185,203,0.3)" },
+				},
+			},
+		},
 		MuiChip: {
 			styleOverrides: {
 				root: {
+					fontWeight: 600,
+					borderRadius: "8px",
 					"&.MuiChip-filledDefault": {
 						backgroundColor: neutral[200],
-						"& .MuiChip-deleteIcon": {
-							color: neutral[400],
-						},
+						"& .MuiChip-deleteIcon": { color: neutral[400] },
 					},
 					"&.MuiChip-outlinedDefault": {
-						"& .MuiChip-deleteIcon": {
-							color: neutral[300],
-						},
+						"& .MuiChip-deleteIcon": { color: neutral[300] },
 					},
 				},
 			},
 		},
 		MuiInputBase: {
 			styleOverrides: {
+				root: { borderRadius: "12px !important" },
 				input: {
-					"&::placeholder": {
-						opacity: 1,
-						color: text.secondary,
-					},
+					"&::placeholder": { opacity: 1, color: text.secondary },
 				},
 			},
 		},
 		MuiOutlinedInput: {
 			styleOverrides: {
-				notchedOutline: {
-					borderColor: divider,
-				},
+				root: { borderRadius: "12px" },
+				notchedOutline: { borderColor: divider },
 				input: {
 					"&:-webkit-autofill": {
 						"-webkit-box-shadow": "0 0 0 100px #f0f5f5 inset",
@@ -186,46 +220,49 @@ export const lightThemeOptions = {
 		MuiMenu: {
 			styleOverrides: {
 				paper: {
+					borderRadius: "16px",
 					borderColor: divider,
 					borderStyle: "solid",
 					borderWidth: 1,
+					boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
 				},
 			},
 		},
 		MuiPopover: {
 			styleOverrides: {
 				paper: {
+					borderRadius: "16px",
 					borderColor: divider,
 					borderStyle: "solid",
 					borderWidth: 1,
+					boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
 				},
 			},
 		},
 		MuiSwitch: {
 			styleOverrides: {
-				switchBase: {
-					color: neutral[500],
-				},
-				track: {
-					backgroundColor: neutral[400],
-					opacity: 1,
-				},
+				switchBase: { color: neutral[500] },
+				track: { backgroundColor: neutral[400], opacity: 1 },
 			},
 		},
 		MuiTableCell: {
 			styleOverrides: {
-				root: {
-					borderBottom: `1px solid ${divider}`,
-				},
+				root: { borderBottom: `1px solid ${divider}` },
 			},
 		},
 		MuiTableHead: {
 			styleOverrides: {
 				root: {
 					backgroundColor: neutral[100],
-					".MuiTableCell-root": {
-						color: neutral[700],
-					},
+					".MuiTableCell-root": { color: neutral[700] },
+				},
+			},
+		},
+		MuiBottomNavigation: {
+			styleOverrides: {
+				root: {
+					backgroundColor: "#FFFFFF",
+					borderTop: `1px solid ${divider}`,
 				},
 			},
 		},

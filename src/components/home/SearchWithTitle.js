@@ -1,11 +1,20 @@
-import { Typography, useMediaQuery, useTheme } from "@mui/material";
-import { Box } from "@mui/system";
+import {
+  Box,
+  Chip,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  alpha,
+} from "@mui/material";
+import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import { useTranslation } from "react-i18next";
 import { getCurrentModuleType } from "helper-functions/getCurrentModuleType";
 import { ModuleTypes } from "helper-functions/moduleTypes";
 import ManageSearch from "../header/second-navbar/ManageSearch";
 import TrackParcelFromHomePage from "../parcel/TrackParcelFromHomePage";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 
 const SearchWithTitle = (props) => {
   const theme = useTheme();
@@ -15,48 +24,36 @@ const SearchWithTitle = (props) => {
   const { zoneid, token, searchQuery, name, query, currentTab } = props;
   const { configData } = useSelector((state) => state.configData);
 
-  const getBannerTexts1 = t("Get your car rental service with");
-  const getBannerSubTexts = t("with affordable price.");
+  // Leer ubicación guardada
+  const [location, setLocation] = useState("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setLocation(localStorage.getItem("location") || "");
+    }
+  }, []);
 
   const getBannerTexts = () => {
     switch (getCurrentModuleType()) {
       case ModuleTypes.GROCERY:
-        return {
-          title: "Lo mejor zarpa directo a tu puerta",
-          subTitle: "Mercado fresco entregado en menos de una hora",
-        };
+        return { title: "Lo mejor zarpa directo a tu puerta", subTitle: "Mercado fresco entregado en menos de una hora" };
       case ModuleTypes.PHARMACY:
-        return {
-          title: "Tu salud siempre a flote",
-          subTitle: "Medicamentos y cuidado personal en tu puerto",
-        };
+        return { title: "Tu salud siempre a flote", subTitle: "Medicamentos y cuidado personal en tu puerto" };
       case ModuleTypes.ECOMMERCE:
-        return {
-          title: "Descubre lo que zarpa para ti",
-          subTitle: "Los mejores productos anclan en tu puerta",
-        };
+        return { title: "Descubre lo que zarpa para ti", subTitle: "Los mejores productos anclan en tu puerta" };
       case ModuleTypes.FOOD:
-        return {
-          title: "¡El sabor zarpa hacia ti!",
-          subTitle: "El mejor restaurante navega hasta tu puerta",
-        };
+        return { title: "¡El sabor zarpa hacia ti!", subTitle: "El mejor restaurante navega hasta tu puerta" };
       case ModuleTypes.PARCEL:
-        return {
-          title: "Sigue tu envío en alta mar",
-          subTitle: "Rastrea tu paquete en tiempo real, donde zarpe.",
-        };
+        return { title: "Sigue tu envío en alta mar", subTitle: "Rastrea tu paquete en tiempo real, donde zarpe." };
       case ModuleTypes.RENTAL:
-        return {
-          title: "Zarpa hacia tu próxima aventura",
-          subTitle: `${getBannerTexts1} ${configData?.business_name} ${getBannerSubTexts}`,
-        };
+        return { title: "Zarpa hacia tu próxima aventura", subTitle: `Renta con ${configData?.business_name}` };
       default:
-        return { title: "", subTitle: "" };
+        return { title: "¿Qué zarpa hoy?", subTitle: "Comida, mercado, taxi y más — todo en un lugar" };
     }
   };
 
   const isRental = moduleType === "rental";
   const isParcel = moduleType === "parcel";
+  const { title, subTitle } = getBannerTexts();
 
   return (
     <Box
@@ -65,19 +62,57 @@ const SearchWithTitle = (props) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: isSmall ? "14px" : "22px",
+        gap: isSmall ? "12px" : "18px",
         px: { xs: 2, sm: 4 },
-        py: { xs: 3, md: 4 },
+        py: { xs: 2.5, md: 3.5 },
         textAlign: "center",
       }}
     >
+      {/* Chip de ubicación estilo Gojek */}
+      {location && (
+        <Chip
+          icon={<LocationOnRoundedIcon sx={{ fontSize: "14px !important", color: "rgba(255,255,255,0.9) !important" }} />}
+          deleteIcon={<KeyboardArrowDownRoundedIcon sx={{ fontSize: "16px !important", color: "rgba(255,255,255,0.7) !important" }} />}
+          onDelete={() => {}}
+          label={
+            <Typography
+              variant="caption"
+              sx={{
+                color: "rgba(255,255,255,0.95)",
+                fontWeight: 600,
+                fontSize: "12px",
+                maxWidth: { xs: "180px", sm: "280px" },
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                display: "block",
+              }}
+            >
+              {location.length > 35 ? location.substring(0, 35) + "…" : location}
+            </Typography>
+          }
+          sx={{
+            background: "rgba(255,255,255,0.15)",
+            backdropFilter: "blur(8px)",
+            border: "1px solid rgba(255,255,255,0.25)",
+            borderRadius: "20px",
+            height: "32px",
+            cursor: "pointer",
+            "&:hover": {
+              background: "rgba(255,255,255,0.22)",
+            },
+          }}
+        />
+      )}
+
+      {/* Título y subtítulo */}
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "10px",
+          gap: "8px",
           alignItems: "center",
-          maxWidth: "680px",
+          maxWidth: "640px",
         }}
       >
         <Typography
@@ -91,27 +126,28 @@ const SearchWithTitle = (props) => {
             textShadow: "0 2px 12px rgba(0,0,0,0.25)",
           }}
         >
-          {t(getBannerTexts().title)}
+          {t(title)}
         </Typography>
         <Typography
           variant={isSmall ? "body2" : "body1"}
           sx={{
             color: "rgba(255,255,255,0.82)",
-            maxWidth: "480px",
+            maxWidth: "460px",
             lineHeight: 1.6,
           }}
         >
-          {t(getBannerTexts().subTitle)}
+          {t(subTitle)}
         </Typography>
       </Box>
 
+      {/* Buscador */}
       {isParcel ? (
         <TrackParcelFromHomePage />
       ) : isRental ? null : (
         <Box
           sx={{
             width: "100%",
-            maxWidth: { xs: "100%", sm: "560px", md: "640px" },
+            maxWidth: { xs: "100%", sm: "540px", md: "620px" },
             "& .MuiOutlinedInput-root": {
               backgroundColor: "#fff",
               borderRadius: "14px",

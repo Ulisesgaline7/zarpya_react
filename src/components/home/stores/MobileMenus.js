@@ -1,182 +1,142 @@
 import React, { useState } from "react";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { Button, FormControlLabel, Paper, styled } from "@mui/material";
-import CustomPopover from "../../CustomPopover";
-import FormControl from "@mui/material/FormControl";
-import Radio from "@mui/material/Radio";
-import FormLabel from "@mui/material/FormLabel";
+import {
+  Box,
+  Button,
+  List,
+  ListItemButton,
+  ListItemText,
+  alpha,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import { useTranslation } from "react-i18next";
-import RadioGroup from "@mui/material/RadioGroup";
-import { CustomStackFullWidth } from "../../../styled-components/CustomStyles.style";
-import { getCurrentModuleType } from "../../../helper-functions/getCurrentModuleType";
-import { ModuleTypes } from "../../../helper-functions/moduleTypes";
+import CustomPopover from "../../CustomPopover";
 
-const getModuleWiseData = (theme) => {
-  switch (getCurrentModuleType()) {
-    case ModuleTypes.GROCERY:
-      return theme.palette.primary.main;
-    case ModuleTypes.PHARMACY:
-      return theme.palette.primary.main;
-    case ModuleTypes.ECOMMERCE:
-      return theme.palette.primary.main;
-    case ModuleTypes.FOOD:
-      return theme.palette.moduleTheme.food;
-  }
-};
+const filterLabels = [
+  { label: "Todos", value: "all" },
+  { label: "A domicilio", value: "delivery" },
+  { label: "Para recoger", value: "take_away" },
+];
 
-const CustomButtonWrapper = styled(Button)(({ theme }) => ({
-  height: "34px",
-  minWidth: "0px",
-  width: "34px",
-  borderRadius: "24px",
-  border: `1px solid ${getModuleWiseData(theme)}`,
-  color: getModuleWiseData(theme),
-  transition: "all 0.18s ease",
-  "&:hover": {
-    backgroundColor: getModuleWiseData(theme),
-    color: "#fff",
-  },
-}));
-
-export const CustomRadioGroup = ({
-  label,
-  data,
-  selectedValue,
-  handleOnChange,
+const MobileMenus = ({
+  selectedMenuIndex,
+  setSelectedMenuIndex,
+  menus,
+  selectedFilterValue,
+  setSelectedFilterValue,
 }) => {
-  const handleChange = (event) => {
-    event.stopPropagation();
-    handleOnChange?.(event.target.value);
-    // setValue(event.target.value);
-  };
-
-  return (
-    <FormControl>
-      <FormLabel id="demo-radio-buttons-group-label">{label}</FormLabel>
-      <RadioGroup value={selectedValue} onChange={handleChange}>
-        {data?.length > 0 &&
-          data?.map((item, index) => {
-            return (
-              <FormControlLabel
-                key={index}
-                value={item?.value}
-                control={
-                  <Radio
-                    sx={{
-                      "&, &.Mui-checked": {
-                        color: (theme) => getModuleWiseData(theme),
-                      },
-                      "&.active": {
-                        color: (theme) => getModuleWiseData(theme),
-                      },
-                    }}
-                  />
-                }
-                label={item?.label}
-              />
-            );
-          })}
-      </RadioGroup>
-    </FormControl>
-  );
-};
-const MobileMenus = (props) => {
-  const {
-    selectedMenuIndex,
-    setSelectedMenuIndex,
-    menus,
-    selectedFilterValue,
-    setSelectedFilterValue,
-  } = props;
-  const [openPopover, setOpenPopover] = useState({
-    open: false,
-    anchorEl: null,
-  });
+  const theme = useTheme();
   const { t } = useTranslation();
-  const deliveryTypes = [
-    { label: "All", value: "all" },
-    { label: "Delivery", value: "home" },
-    {
-      label: "Takeaway",
-      value: "takeaway",
-    },
-  ];
-  const categories = [
-    { label: "All", value: "all" },
-    { label: "Newly Joined", value: "newly_joined" },
-    {
-      label: "Popular",
-      value: "popular",
-    },
-    {
-      label: "Top Rated",
-      value: "top_rated",
-    },
-  ];
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
-  const handleButtonClick = (e) => {
-    setOpenPopover({
-      open: true,
-      anchorEl: e.currentTarget,
-    });
-  };
-  const handlePopoverClose = () => {
-    setOpenPopover({
-      open: false,
-      anchorEl: null,
-    });
-  };
-  const handleDeliveryTypeOnChange = (value) => {
-    setSelectedFilterValue(value);
-  };
-  const handleCategoriesChange = (value) => {
-    let index = categories.findIndex((item, index) => item?.value === value);
-    setSelectedMenuIndex(index);
-  };
-  const selectedValueForCategoreis = () => {
-    return categories.find((item, index) => index === selectedMenuIndex)?.value;
-  };
+  const primary = theme.palette.primary.main;
 
   return (
-    <div>
-      <CustomButtonWrapper onClick={handleButtonClick} variant="outlined">
-        <FilterListIcon fontSize="small" />
-      </CustomButtonWrapper>
-      {openPopover?.open && (
+    <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
+      {/* Horizontally scrollable pill tabs */}
+      <Box
+        sx={{
+          display: "flex",
+          gap: "6px",
+          overflowX: "auto",
+          flexShrink: 1,
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": { display: "none" },
+        }}
+      >
+        {menus.map((item, index) => {
+          const isActive = selectedMenuIndex === index;
+          return (
+            <Box
+              key={index}
+              onClick={() => setSelectedMenuIndex(index)}
+              sx={{
+                flexShrink: 0,
+                cursor: "pointer",
+                px: "12px",
+                py: "5px",
+                borderRadius: "20px",
+                fontSize: "12px",
+                fontWeight: isActive ? 700 : 500,
+                whiteSpace: "nowrap",
+                border: `1.5px solid ${isActive ? primary : alpha(primary, 0.25)}`,
+                backgroundColor: isActive ? primary : "transparent",
+                color: isActive ? "#fff" : "text.secondary",
+                transition: "all 0.15s ease",
+                userSelect: "none",
+              }}
+            >
+              {t(item?.label ?? item)}
+            </Box>
+          );
+        })}
+      </Box>
+
+      {/* Compact delivery-type filter button */}
+      <Button
+        onClick={(e) => setAnchorEl(e.currentTarget)}
+        variant="outlined"
+        size="small"
+        sx={{
+          flexShrink: 0,
+          minWidth: 0,
+          width: "32px",
+          height: "32px",
+          borderRadius: "8px",
+          p: 0,
+          border: `1.5px solid ${alpha(primary, 0.35)}`,
+          color: open ? primary : "text.secondary",
+          backgroundColor: open ? alpha(primary, 0.08) : "transparent",
+        }}
+      >
+        <FilterAltOutlinedIcon fontSize="small" />
+      </Button>
+
+      {open && (
         <CustomPopover
-          openPopover={openPopover?.open}
-          anchorEl={openPopover?.anchorEl}
+          openPopover={open}
+          anchorEl={anchorEl}
           placement="bottom"
-          handleClose={handlePopoverClose}
+          handleClose={() => setAnchorEl(null)}
         >
-          <Paper
-            sx={{
-              top: "100px",
-              p: "20px",
-              width: "220px",
-            }}
-          >
-            <CustomStackFullWidth spacing={1}>
-              <CustomRadioGroup
-                label={t("Delivery Type")}
-                data={deliveryTypes}
-                selectedValue={selectedFilterValue}
-                handleOnChange={handleDeliveryTypeOnChange}
-              />
-              <CustomRadioGroup
-                label={t("Categories")}
-                data={categories}
-                selectedValue={selectedValueForCategoreis()}
-                handleOnChange={handleCategoriesChange}
-              />
-            </CustomStackFullWidth>
-          </Paper>
+          <Box sx={{ width: 140, bgcolor: "background.paper", borderRadius: "10px", overflow: "hidden" }}>
+            <List dense disablePadding>
+              {filterLabels.map((item, index) => (
+                <ListItemButton
+                  key={index}
+                  selected={selectedFilterValue === item.value}
+                  onClick={() => {
+                    setSelectedFilterValue(item.value);
+                    setAnchorEl(null);
+                  }}
+                  sx={{
+                    py: 0.8,
+                    px: 2,
+                    "&.Mui-selected": {
+                      backgroundColor: alpha(primary, 0.1),
+                      "& .MuiListItemText-primary": {
+                        color: primary,
+                        fontWeight: 700,
+                      },
+                    },
+                    "&:hover": {
+                      backgroundColor: alpha(primary, 0.06),
+                    },
+                  }}
+                >
+                  <ListItemText
+                    primary={t(item.label)}
+                    primaryTypographyProps={{ fontSize: "13px", fontWeight: selectedFilterValue === item.value ? 700 : 400 }}
+                  />
+                </ListItemButton>
+              ))}
+            </List>
+          </Box>
         </CustomPopover>
       )}
-    </div>
+    </Box>
   );
 };
-
-MobileMenus.propTypes = {};
 
 export default MobileMenus;

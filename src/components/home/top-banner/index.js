@@ -8,13 +8,15 @@ import LeftCar from "/public/static/rental/left_car.png";
 import RightCar from "/public/static/rental/right_car.png";
 import { useEffect, useState } from "react";
 
-// Module-specific gradient configs
+// Gradientes por módulo — colores originales de Zarpya
 const MODULE_GRADIENTS = {
-  grocery: "linear-gradient(135deg, #15263E 0%, #1a3550 40%, #2FB9CB 100%)",
+  grocery:  "linear-gradient(135deg, #15263E 0%, #1a3550 40%, #2FB9CB 100%)",
   pharmacy: "linear-gradient(135deg, #15263E 0%, #1e3048 40%, #5859A3 100%)",
-  ecommerce: "linear-gradient(135deg, #0D1E30 0%, #15263E 50%, #2FB9CB 100%)",
-  food: "linear-gradient(135deg, #2FB9CB 0%, #15263E 60%, #000100 100%)",
-  parcel: "linear-gradient(135deg, #15263E 0%, #1a3550 50%, #4AB05E 100%)",
+  ecommerce:"linear-gradient(135deg, #0D1E30 0%, #15263E 50%, #2FB9CB 100%)",
+  food:     "linear-gradient(135deg, #2FB9CB 0%, #15263E 60%, #000100 100%)",
+  parcel:   "linear-gradient(135deg, #15263E 0%, #1a3550 50%, #4AB05E 100%)",
+  taxi:     "linear-gradient(135deg, #0D1E30 0%, #15263E 50%, #2FB9CB 100%)",
+  services: "linear-gradient(135deg, #15263E 0%, #1a3550 50%, #F59E0B 100%)",
 };
 
 const TopBanner = () => {
@@ -36,9 +38,9 @@ const TopBanner = () => {
     <CustomBoxFullWidth
       sx={{
         minHeight: {
-          xs: isParcel ? "220px" : "260px",
-          sm: "300px",
-          md: "340px",
+          xs: isParcel ? "200px" : "240px",
+          sm: "280px",
+          md: "300px",
         },
         position: "relative",
         overflow: "hidden",
@@ -65,87 +67,72 @@ const TopBanner = () => {
           }}
         >
           <BannerCityIcon height="100%" width="100%" objectFit="cover" />
-          <Box
-            component="img"
-            className="left_img"
-            src={LeftCar?.src}
-            width={238}
-            height={94}
-            alt=""
-          />
-          <Box
-            component="img"
-            className="right_img"
-            src={RightCar?.src}
-            width={246}
-            height={122}
-            alt=""
-          />
+          <Box component="img" className="left_img" src={LeftCar?.src} width={238} height={94} alt="" />
+          <Box component="img" className="right_img" src={RightCar?.src} width={246} height={122} alt="" />
         </Box>
       ) : (
         <>
-          {/* Decorative wave overlay bottom */}
+          {/* Wave bottom */}
           <Box
             sx={{
               position: "absolute",
               bottom: 0,
               left: 0,
               right: 0,
-              height: "50px",
-              background:
-                theme.palette.mode === "dark"
-                  ? theme.palette.background.default
-                  : "#fff",
+              height: "48px",
+              background: theme.palette.mode === "dark"
+                ? theme.palette.background.default
+                : "#fff",
               clipPath: "ellipse(60% 100% at 50% 100%)",
               pointerEvents: "none",
             }}
           />
-          {/* Subtle dot grid pattern */}
+          {/* Dot grid */}
           <Box
             sx={{
               position: "absolute",
               inset: 0,
-              opacity: 0.06,
+              opacity: 0.05,
               backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`,
-              backgroundSize: "28px 28px",
+              backgroundSize: "24px 24px",
               pointerEvents: "none",
             }}
           />
-          {/* Top-right decorative circle */}
+          {/* Círculo decorativo top-right */}
           <Box
             sx={{
               position: "absolute",
-              top: "-80px",
-              right: "-80px",
-              width: { xs: "240px", md: "380px" },
-              height: { xs: "240px", md: "380px" },
-              borderRadius: "50%",
-              background: alpha("#fff", 0.05),
-              pointerEvents: "none",
-            }}
-          />
-          <Box
-            sx={{
-              position: "absolute",
-              top: "20px",
-              right: "20px",
-              width: { xs: "140px", md: "220px" },
-              height: { xs: "140px", md: "220px" },
+              top: "-100px",
+              right: "-100px",
+              width: { xs: "260px", md: "400px" },
+              height: { xs: "260px", md: "400px" },
               borderRadius: "50%",
               background: alpha("#fff", 0.04),
               pointerEvents: "none",
             }}
           />
-          {/* Bottom-left decorative circle */}
           <Box
             sx={{
               position: "absolute",
-              bottom: "-60px",
-              left: "-60px",
-              width: { xs: "180px", md: "280px" },
-              height: { xs: "180px", md: "280px" },
+              top: "10px",
+              right: "10px",
+              width: { xs: "150px", md: "240px" },
+              height: { xs: "150px", md: "240px" },
               borderRadius: "50%",
-              background: alpha("#fff", 0.04),
+              background: alpha("#fff", 0.03),
+              pointerEvents: "none",
+            }}
+          />
+          {/* Círculo bottom-left */}
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: "-80px",
+              left: "-80px",
+              width: { xs: "200px", md: "300px" },
+              height: { xs: "200px", md: "300px" },
+              borderRadius: "50%",
+              background: alpha("#fff", 0.03),
               pointerEvents: "none",
             }}
           />
